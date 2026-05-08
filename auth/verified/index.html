@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="robots" content="noindex" />
+  <title>Email Verified — MapChat</title>
+  <style>
+    /* MapChat dark theme — palette mirrors constants/Colors.ts */
+    :root {
+      --bg: #000000;
+      --card: #1C1C1E;
+      --card-border: #2C2C2E;
+      --text: #FFFEFE;
+      --text-secondary: rgba(255, 254, 254, 0.65);
+      --primary: #2F80ED;
+      --button-text: #FFFFFF;
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .icon-circle {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--success-light);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .icon-circle svg {
+      width: 56px;
+      height: 56px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin: 0 0 28px;
+    }
+
+    .button {
+      display: inline-block;
+      width: 100%;
+      max-width: 320px;
+      padding: 14px 24px;
+      background: var(--primary);
+      color: var(--button-text);
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      -webkit-appearance: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .button:active { opacity: 0.7; }
+    .button:hover { opacity: 0.92; }
+
+    .hint {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 20px 0 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <div class="icon-circle" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 12.5L10 17.5L19 8.5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Email Verified!</h1>
+
+    <p id="description" class="description">
+      Your email has been verified successfully.
+    </p>
+
+    <button id="returnButton" class="button" type="button">
+      Return to App
+    </button>
+
+    <p id="hint" class="hint" style="display: none;">
+      If the app didn't open, return to MapChat — your verification will be detected automatically.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var DEEP_LINK = 'mapchatmobile://auth/verified';
+      var AUTO_DELAY_MS = 1500;
+      var description = document.getElementById('description');
+      var hint = document.getElementById('hint');
+      var button = document.getElementById('returnButton');
+
+      function isMobile() {
+        try {
+          return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function tryDeepLink() {
+        try {
+          window.location.href = DEEP_LINK;
+        } catch (e) {
+          // Browser blocked the navigation — user falls back to the button.
+        }
+      }
+
+      var mobile = isMobile();
+
+      if (mobile) {
+        description.textContent = 'Returning you to MapChat…';
+        hint.style.display = 'block';
+        // Auto-attempt deep link after a brief moment so the success state is visible.
+        setTimeout(tryDeepLink, AUTO_DELAY_MS);
+      } else {
+        description.textContent = 'Open MapChat on your phone — your verification will be detected automatically.';
+        button.textContent = 'Continue';
+        // Desktop: button is decorative; clicking does nothing useful since the app is on phone.
+        // Hide it instead of showing a broken click target.
+        button.style.display = 'none';
+      }
+
+      button.addEventListener('click', function () {
+        if (mobile) tryDeepLink();
+      });
+    })();
+  </script>
+</body>
+</html>
