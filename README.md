@@ -72,3 +72,10 @@ Logged in `LAUNCH_READINESS.md` §4 / BACKLOG when the time comes.
 ## Iteration
 
 To change the page later, just edit `auth/verified/index.html` in the deployed repo and push to `main`. GitHub Pages redeploys in ~1 min. No build step.
+
+## Data attribution
+
+The city type-ahead on the waitlist form is powered by city data from
+[GeoNames](https://www.geonames.org/) (geonames.org), licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The data lives
+in the MapChat Supabase `city_directory` table (migrations 210/211).
