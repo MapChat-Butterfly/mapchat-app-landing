@@ -602,6 +602,9 @@ p{line-height:1.5}
 .email-form input:focus{border-color:var(--electric)}
 .email-note{font-family:var(--font-sys);font-size:13px;color:var(--mute-dark);margin-top:16px}
 .email-ok{color:var(--wiggles);font-family:var(--font-sys);font-weight:600;margin-top:18px;display:none}
+.email-err{color:#ff8087;font-family:var(--font-sys);font-size:14px;font-weight:600;margin-top:14px;display:none}
+/* honeypot: parked far off-screen so humans never see it; bots auto-filling every field reveal themselves */
+.hp-field{position:absolute !important;left:-9999px !important;width:1px;height:1px;opacity:0;pointer-events:none}
 
 /* ---------- FOOTER ---------- */
 .footer{background:#060608;border-top:1px solid var(--hair-dark);padding:64px 0 40px}
@@ -1124,13 +1127,15 @@ p{line-height:1.5}
       <div class="final-signup">
         <p class="news-prompt">New spots and events drop every week. Want the heads-up?</p>
         <form class="email-form" id="emailForm">
-          <input type="email" id="emailInput" placeholder="Your email" required />
-          <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" />
+          <input type="email" id="emailInput" placeholder="Your email" maxlength="254" required />
+          <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" maxlength="80" />
+          <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button type="button" class="hero-add-city" id="addCityBtn"><ion-icon name="add-circle-outline"></ion-icon> Add your city</button>
           <button type="submit" class="btn btn-primary">Keep me posted</button>
         </form>
         <div class="email-note">No spam, just new cities, new games, and the occasional nudge to go outside.</div>
         <div class="email-ok" id="emailOk">You're on the list 👋 We'll let you know when your city lights up.</div>
+        <div class="email-err" id="emailErr">Hmm, that didn't go through. Mind trying again in a moment?</div>
       </div>
     </div>
   </div>
@@ -1207,20 +1212,54 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-/* email capture (front-end stub, wire to your provider) — handles every .email-form */
+/* email capture — saves signups to the MapChat waitlist (Supabase). Handles every .email-form.
+   WAITLIST_KEY is the public "publishable" key: safe to expose by design. Database Row Level
+   Security only permits INSERT with it — it can never read, change, or delete data. */
+const WAITLIST_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/waitlist_signups';
+const WAITLIST_KEY = 'sb_publishable_A0eaeoNBE4Fqpd-ngVOPgg_RnUS770_';
+
 document.querySelectorAll('.email-form').forEach((form) => {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = (form.querySelector('input[type="email"]') || {}).value || '';
-    const cityEl = form.querySelector('input[name="city"]');
-    const city = cityEl ? cityEl.value : '';
-    // TODO: POST { email, city } to Mailchimp/ConvertKit/Formspree endpoint
-    console.log('Newsletter signup:', email, city ? '· city: ' + city : '');
-    form.style.display = 'none';
+    if (form.dataset.busy) return;
+
     const parent = form.parentElement;
-    parent.querySelectorAll('.email-note, .news-prompt, .hero-add-city').forEach((el) => el.style.display = 'none');
-    const ok = parent.querySelector('.email-ok');
-    if (ok) ok.style.display = 'block';
+    const email = ((form.querySelector('input[type="email"]') || {}).value || '').trim().toLowerCase();
+    const cityEl = form.querySelector('input[name="city"]');
+    const city = cityEl ? cityEl.value.trim() : '';
+    const honeypot = form.querySelector('.hp-field');
+    const btn = form.querySelector('button[type="submit"]');
+    const errEl = parent.querySelector('.email-err');
+
+    const showSuccess = () => {
+      form.style.display = 'none';
+      parent.querySelectorAll('.email-note, .news-prompt, .hero-add-city, .email-err').forEach((el) => el.style.display = 'none');
+      const ok = parent.querySelector('.email-ok');
+      if (ok) ok.style.display = 'block';
+    };
+
+    /* the honeypot is invisible to humans — if it's filled, a bot did it: pretend success, save nothing */
+    if (honeypot && honeypot.value) { showSuccess(); return; }
+    if (!email) return;
+
+    form.dataset.busy = '1';
+    const btnLabel = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Adding you…'; }
+    if (errEl) errEl.style.display = 'none';
+
+    try {
+      const res = await fetch(WAITLIST_URL, {
+        method: 'POST',
+        headers: { apikey: WAITLIST_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ email: email, city: city || null }),
+      });
+      if (!res.ok) throw new Error('waitlist insert failed: HTTP ' + res.status);
+      showSuccess();
+    } catch (err) {
+      if (errEl) errEl.style.display = 'block';
+      if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+      delete form.dataset.busy;
+    }
   });
 });
 
