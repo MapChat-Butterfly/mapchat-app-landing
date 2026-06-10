@@ -216,7 +216,13 @@ p{line-height:1.5}
 .hn-city{display:none}
 .email-form.show-city .hn-city{display:block;flex-basis:100%}
 .final .news-prompt{font-family:var(--font-sys);font-size:15px;color:#c2c2cc;margin-top:36px}
-.final .email-form{margin-top:16px}
+.final-signup{display:flex;flex-direction:column;align-items:center}
+/* vertical signup: email -> add your city -> keep me posted */
+.final .email-form{margin-top:16px;flex-direction:column;align-items:stretch;flex-wrap:nowrap;max-width:360px;gap:12px}
+.final .email-form input{min-width:0;width:100%;flex:0 0 auto}
+.final .email-form .btn{width:100%;flex:0 0 auto}
+.final .email-form .hero-add-city{align-self:center;margin:2px 0;flex:0 0 auto}
+.final .email-form.show-city .hn-city{flex-basis:auto;width:100%}
 .hero-add-city{margin-top:13px;display:inline-flex;align-items:center;gap:7px;font-family:var(--font-sys);font-size:14px;color:var(--electric-bright);background:none;border:none;cursor:pointer;padding:0;transition:color .2s}
 .hero-add-city:hover{color:#fff}
 .hero-add-city ion-icon{font-size:17px}
@@ -653,14 +659,49 @@ p{line-height:1.5}
   .foot-grid{grid-template-columns:1fr 1fr;gap:36px 24px}
 }
 @media (max-width:560px){
-  .screens-grid{grid-template-columns:1fr;max-width:300px}
-  .reasons-grid{grid-template-columns:1fr}
+  /* smaller hero phone mockup on mobile */
+  .hero-grid .phone{width:236px;padding:9px;border-radius:36px;box-shadow:0 36px 80px rgba(0,0,0,.55), 0 0 0 2px #232327, 0 0 0 6px #0d0d10}
+  .hero-grid .phone .notch{width:94px;height:20px}
+  .hero-grid .phone .screen{border-radius:28px}
+  /* smaller games-section phone on mobile */
+  .games .phone{width:236px;padding:9px;border-radius:36px;box-shadow:0 36px 80px rgba(0,0,0,.55), 0 0 0 2px #232327, 0 0 0 6px #0d0d10}
+  .games .phone .notch{width:94px;height:20px}
+  .games .phone .screen{border-radius:28px}
+  /* games CTA: keep both buttons side by side on mobile */
+  .games .hero-cta{flex-wrap:nowrap;gap:10px;justify-content:center}
+  .games .hero-cta .btn{flex:1 1 0;min-width:0;padding:13px 14px;font-size:13px;text-align:center;justify-content:center;white-space:nowrap}
+  /* look-inside: 2 phone screens side by side on mobile */
+  .screens-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .screen-card{padding:14px 8px 0;min-height:0;border-radius:14px}
+  .sc-cap{min-height:56px}
+  .sc-cap h3{font-size:13.5px;line-height:1.12}
+  .sc-cap p{font-size:11px;margin-top:4px;line-height:1.35}
+  .phone-wrap{width:124px;height:222px;margin:9px auto 0}
+  .phone-wrap .phone{transform:scale(.413)}
+  /* reasons: 2 cards side by side on mobile */
+  .reasons-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .reason{padding:16px 13px 52px;min-height:0;border-radius:14px}
+  .reason h3{font-size:15px;line-height:1.15;min-height:2.4em}
+  .reason p{font-size:12px;margin-top:8px;line-height:1.45}
+  .reason .ricon{width:46px;height:46px;right:11px;bottom:11px}
+  /* how it works: tighter on phones */
+  .steps{gap:7px}
+  .step{padding:13px 8px}
+  .step .sn{font-size:9.5px}
+  .step .mascot{height:48px;margin:5px 0 9px}
+  .step h3{font-size:13px;line-height:1.12}
+  .step p{font-size:10.5px;line-height:1.4;margin-top:7px}
   .trending{min-height:480px}
   .ctile{flex-basis:128px;height:172px}
 }
 @media (max-width:720px){
   .section{padding:72px 0}
-  .steps{grid-template-columns:1fr}
+  /* how it works: keep all 3 steps side by side, scaled to fit */
+  .steps{grid-template-columns:repeat(3,1fr);gap:10px}
+  .step{padding:18px 12px}
+  .step .mascot{height:62px;margin:6px 0 12px}
+  .step h3{font-size:16px}
+  .step p{font-size:12px;line-height:1.45;margin-top:8px}
   .nav-links{display:none}
   .nav-cta{display:none}
   .nav-toggle{display:block}
@@ -677,7 +718,11 @@ p{line-height:1.5}
 }
 @media (max-width:480px){
   .wrap{padding:0 18px}
-  .foot-grid{grid-template-columns:1fr}
+  /* footer: brand on top, link columns side by side */
+  .foot-grid{grid-template-columns:repeat(3,1fr);gap:26px 12px}
+  .foot-brand{grid-column:1/-1}
+  .foot-col h4{font-size:.62rem;letter-spacing:.08em;margin-bottom:11px}
+  .foot-col a{font-size:12.5px;margin-bottom:9px}
   .stats-grid{grid-template-columns:1fr}
   .stat + .stat{border-left:none;border-top:1px solid rgba(255,255,255,.18)}
   .stat:nth-child(3){border-top:1px solid rgba(255,255,255,.18)}
@@ -1076,15 +1121,17 @@ p{line-height:1.5}
         </a>
       </div>
 
-      <p class="news-prompt">New spots and events drop every week. Want the heads-up?</p>
-      <form class="email-form" id="emailForm">
-        <input type="email" id="emailInput" placeholder="Your email" required />
-        <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" />
-        <button type="submit" class="btn btn-primary">Keep me posted</button>
-      </form>
-      <button type="button" class="hero-add-city" id="addCityBtn"><ion-icon name="add-circle-outline"></ion-icon> Add your city</button>
-      <div class="email-note">No spam, just new cities, new games, and the occasional nudge to go outside.</div>
-      <div class="email-ok" id="emailOk">You're on the list 👋 We'll let you know when your city lights up.</div>
+      <div class="final-signup">
+        <p class="news-prompt">New spots and events drop every week. Want the heads-up?</p>
+        <form class="email-form" id="emailForm">
+          <input type="email" id="emailInput" placeholder="Your email" required />
+          <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" />
+          <button type="button" class="hero-add-city" id="addCityBtn"><ion-icon name="add-circle-outline"></ion-icon> Add your city</button>
+          <button type="submit" class="btn btn-primary">Keep me posted</button>
+        </form>
+        <div class="email-note">No spam, just new cities, new games, and the occasional nudge to go outside.</div>
+        <div class="email-ok" id="emailOk">You're on the list 👋 We'll let you know when your city lights up.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1112,7 +1159,7 @@ p{line-height:1.5}
       </div>
       <div class="foot-col">
         <h5>Company</h5>
-        <a href="#">About</a>
+        <a href="/about">About</a>
         <a href="https://benjaminboehlke.bubbleapps.io/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy</a>
         <a href="https://benjaminboehlke.bubbleapps.io/tos" target="_blank" rel="noopener noreferrer">Terms</a>
         <a href="mailto:hello@mapchat.social">Contact</a>
