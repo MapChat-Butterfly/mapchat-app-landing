@@ -213,8 +213,14 @@ p{line-height:1.5}
 .hero-copy .hero-news-form input::placeholder{color:#8a8a93}
 .hero-copy .hero-news-form input:focus{border-color:var(--electric)}
 .hero-copy .hero-news-form .btn{padding:13px 22px;font-size:15px;flex:0 0 auto}
-.hn-city{display:none}
-.email-form.show-city .hn-city{display:block;flex-basis:100%}
+.hn-city-wrap{display:none;position:relative;flex-basis:100%}
+.email-form.show-city .hn-city-wrap{display:block}
+.hn-city-wrap .hn-city{display:block;width:100%}
+/* city type-ahead dropdown (anchored to the city input) */
+.city-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:#15182b;border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;display:none;box-shadow:0 12px 32px rgba(0,0,0,.45);text-align:left}
+.city-list.open{display:block}
+.city-list .city-opt{padding:11px 18px;font-family:var(--font-sys);font-size:14px;color:#e8e8ee;cursor:pointer}
+.city-list .city-opt.active,.city-list .city-opt:hover{background:rgba(63,127,255,.18);color:#fff}
 .final .news-prompt{font-family:var(--font-sys);font-size:15px;color:#c2c2cc;margin-top:36px}
 .final-signup{display:flex;flex-direction:column;align-items:center}
 /* vertical signup: email -> add your city -> keep me posted */
@@ -1128,7 +1134,10 @@ p{line-height:1.5}
         <p class="news-prompt">New spots and events drop every week. Want the heads-up?</p>
         <form class="email-form" id="emailForm">
           <input type="email" id="emailInput" placeholder="Your email" maxlength="254" required />
-          <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" maxlength="80" />
+          <span class="hn-city-wrap">
+            <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" maxlength="80" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="cityList" autocomplete="off" />
+            <div class="city-list" id="cityList" role="listbox" aria-label="City suggestions"></div>
+          </span>
           <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button type="button" class="hero-add-city" id="addCityBtn"><ion-icon name="add-circle-outline"></ion-icon> Add your city</button>
           <button type="submit" class="btn btn-primary">Keep me posted</button>
@@ -1247,11 +1256,19 @@ document.querySelectorAll('.email-form').forEach((form) => {
     if (btn) { btn.disabled = true; btn.textContent = 'Adding you…'; }
     if (errEl) errEl.style.display = 'none';
 
+    /* if the city was picked from the type-ahead (and not edited afterwards),
+       store its coordinates too — out-of-market demand becomes mappable */
+    const picked = form.dataset.cityLabel && city === form.dataset.cityLabel;
     try {
       const res = await fetch(WAITLIST_URL, {
         method: 'POST',
         headers: { apikey: WAITLIST_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify({ email: email, city: city || null }),
+        body: JSON.stringify({
+          email: email,
+          city: city || null,
+          latitude: picked ? Number(form.dataset.cityLat) : null,
+          longitude: picked ? Number(form.dataset.cityLng) : null,
+        }),
       });
       if (!res.ok) throw new Error('waitlist insert failed: HTTP ' + res.status);
       showSuccess();
@@ -1262,6 +1279,100 @@ document.querySelectorAll('.email-form').forEach((form) => {
     }
   });
 });
+
+/* city type-ahead — answers "Paris in Texas or Paris in France?" by letting the
+   visitor pick from real US cities (search_us_cities: US-only, population-ranked,
+   max 8). Picking stores coordinates; free text still submits fine if they skip it. */
+const CITY_SEARCH_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/rpc/search_us_cities';
+const cityInput = document.querySelector('#emailForm input[name="city"]');
+const cityList = document.getElementById('cityList');
+const emailFormEl = document.getElementById('emailForm');
+if (cityInput && cityList && emailFormEl) {
+  let items = [];
+  let active = -1;
+  let debounceTimer = null;
+  let inflight = null;
+
+  const close = () => {
+    cityList.classList.remove('open');
+    cityList.innerHTML = '';
+    items = [];
+    active = -1;
+    cityInput.setAttribute('aria-expanded', 'false');
+    cityInput.removeAttribute('aria-activedescendant');
+  };
+
+  const clearPick = () => {
+    delete emailFormEl.dataset.cityLabel;
+    delete emailFormEl.dataset.cityLat;
+    delete emailFormEl.dataset.cityLng;
+  };
+
+  const pick = (i) => {
+    const it = items[i];
+    if (!it) return;
+    const label = it.name + ', ' + it.admin1;
+    cityInput.value = label;
+    emailFormEl.dataset.cityLabel = label;
+    emailFormEl.dataset.cityLat = String(it.latitude);
+    emailFormEl.dataset.cityLng = String(it.longitude);
+    close();
+  };
+
+  const render = () => {
+    cityList.innerHTML = '';
+    items.forEach((it, i) => {
+      const opt = document.createElement('div');
+      opt.className = 'city-opt' + (i === active ? ' active' : '');
+      opt.setAttribute('role', 'option');
+      opt.id = 'cityOpt' + i;
+      opt.textContent = it.name + ', ' + it.admin1;  // textContent: data can never inject markup
+      opt.addEventListener('mousedown', (ev) => { ev.preventDefault(); pick(i); });
+      cityList.appendChild(opt);
+    });
+    cityList.classList.toggle('open', items.length > 0);
+    cityInput.setAttribute('aria-expanded', items.length > 0 ? 'true' : 'false');
+    if (active >= 0) cityInput.setAttribute('aria-activedescendant', 'cityOpt' + active);
+    else cityInput.removeAttribute('aria-activedescendant');
+  };
+
+  const search = async (q) => {
+    if (inflight) inflight.abort();          // supersede the stale request
+    inflight = new AbortController();
+    try {
+      const res = await fetch(CITY_SEARCH_URL, {
+        method: 'POST',
+        headers: { apikey: WAITLIST_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_query: q }),
+        signal: inflight.signal,
+      });
+      if (!res.ok) { close(); return; }
+      items = await res.json();
+      active = -1;
+      render();
+    } catch (err) {
+      /* aborted or offline — the field still works as free text */
+    }
+  };
+
+  cityInput.addEventListener('input', () => {
+    clearPick();                              // editing after a pick makes it free text again
+    const q = cityInput.value.trim();
+    clearTimeout(debounceTimer);
+    if (q.length < 2) { close(); return; }
+    debounceTimer = setTimeout(() => search(q), 250);
+  });
+
+  cityInput.addEventListener('keydown', (e) => {
+    if (!items.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % items.length; render(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + items.length) % items.length; render(); }
+    else if (e.key === 'Enter') { if (active >= 0) { e.preventDefault(); pick(active); } else close(); }
+    else if (e.key === 'Escape') { close(); }
+  });
+
+  cityInput.addEventListener('blur', () => setTimeout(close, 150));
+}
 
 /* "Add your city" toggle — reveals the city field in the signup form */
 const addCityBtn = document.getElementById('addCityBtn');
