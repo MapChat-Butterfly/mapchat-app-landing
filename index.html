@@ -213,8 +213,14 @@ p{line-height:1.5}
 .hero-copy .hero-news-form input::placeholder{color:#8a8a93}
 .hero-copy .hero-news-form input:focus{border-color:var(--electric)}
 .hero-copy .hero-news-form .btn{padding:13px 22px;font-size:15px;flex:0 0 auto}
-.hn-city{display:none}
-.email-form.show-city .hn-city{display:block;flex-basis:100%}
+.hn-city-wrap{display:none;position:relative;flex-basis:100%}
+.email-form.show-city .hn-city-wrap{display:block}
+.hn-city-wrap .hn-city{display:block;width:100%}
+/* city type-ahead dropdown (anchored to the city input) */
+.city-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:#15182b;border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;display:none;box-shadow:0 12px 32px rgba(0,0,0,.45);text-align:left}
+.city-list.open{display:block}
+.city-list .city-opt{padding:11px 18px;font-family:var(--font-sys);font-size:14px;color:#e8e8ee;cursor:pointer}
+.city-list .city-opt.active,.city-list .city-opt:hover{background:rgba(63,127,255,.18);color:#fff}
 .final .news-prompt{font-family:var(--font-sys);font-size:15px;color:#c2c2cc;margin-top:36px}
 .final-signup{display:flex;flex-direction:column;align-items:center}
 /* vertical signup: email -> add your city -> keep me posted */
@@ -602,6 +608,10 @@ p{line-height:1.5}
 .email-form input:focus{border-color:var(--electric)}
 .email-note{font-family:var(--font-sys);font-size:13px;color:var(--mute-dark);margin-top:16px}
 .email-ok{color:var(--wiggles);font-family:var(--font-sys);font-weight:600;margin-top:18px;display:none}
+.email-err{color:#ff8087;font-family:var(--font-sys);font-size:14px;font-weight:600;margin-top:14px;display:none}
+.email-blocked{color:#ffc24a;font-family:var(--font-sys);font-size:14px;font-weight:600;margin-top:14px;display:none}
+/* honeypot: parked far off-screen so humans never see it; bots auto-filling every field reveal themselves */
+.hp-field{position:absolute !important;left:-9999px !important;width:1px;height:1px;opacity:0;pointer-events:none}
 
 /* ---------- FOOTER ---------- */
 .footer{background:#060608;border-top:1px solid var(--hair-dark);padding:64px 0 40px}
@@ -1124,13 +1134,19 @@ p{line-height:1.5}
       <div class="final-signup">
         <p class="news-prompt">New spots and events drop every week. Want the heads-up?</p>
         <form class="email-form" id="emailForm">
-          <input type="email" id="emailInput" placeholder="Your email" required />
-          <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" />
+          <input type="email" id="emailInput" placeholder="Your email" maxlength="254" required />
+          <span class="hn-city-wrap">
+            <input type="text" name="city" class="hn-city" placeholder="Your city (where should we land next?)" maxlength="80" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="cityList" autocomplete="off" />
+            <div class="city-list" id="cityList" role="listbox" aria-label="City suggestions"></div>
+          </span>
+          <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button type="button" class="hero-add-city" id="addCityBtn"><ion-icon name="add-circle-outline"></ion-icon> Add your city</button>
           <button type="submit" class="btn btn-primary">Keep me posted</button>
         </form>
         <div class="email-note">No spam, just new cities, new games, and the occasional nudge to go outside.</div>
         <div class="email-ok" id="emailOk">You're on the list 👋 We'll let you know when your city lights up.</div>
+        <div class="email-err" id="emailErr">Hmm, that didn't go through. Mind trying again in a moment?</div>
+        <div class="email-blocked" id="emailBlocked">That looks like a disposable email address — mind using a real one? That's where the heads-up lands.</div>
       </div>
     </div>
   </div>
@@ -1207,22 +1223,186 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-/* email capture (front-end stub, wire to your provider) — handles every .email-form */
+/* email capture — saves signups to the MapChat waitlist (Supabase). Handles every .email-form.
+   WAITLIST_KEY is the public "publishable" key: safe to expose by design. Database Row Level
+   Security only permits INSERT with it — it can never read, change, or delete data. */
+const WAITLIST_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/waitlist_signups';
+const EMAIL_CHECK_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/rpc/check_signup_email_allowed';
+const WAITLIST_KEY = 'sb_publishable_A0eaeoNBE4Fqpd-ngVOPgg_RnUS770_';
+
 document.querySelectorAll('.email-form').forEach((form) => {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = (form.querySelector('input[type="email"]') || {}).value || '';
-    const cityEl = form.querySelector('input[name="city"]');
-    const city = cityEl ? cityEl.value : '';
-    // TODO: POST { email, city } to Mailchimp/ConvertKit/Formspree endpoint
-    console.log('Newsletter signup:', email, city ? '· city: ' + city : '');
-    form.style.display = 'none';
+    if (form.dataset.busy) return;
+
     const parent = form.parentElement;
-    parent.querySelectorAll('.email-note, .news-prompt, .hero-add-city').forEach((el) => el.style.display = 'none');
-    const ok = parent.querySelector('.email-ok');
-    if (ok) ok.style.display = 'block';
+    const email = ((form.querySelector('input[type="email"]') || {}).value || '').trim().toLowerCase();
+    const cityEl = form.querySelector('input[name="city"]');
+    const city = cityEl ? cityEl.value.trim() : '';
+    const honeypot = form.querySelector('.hp-field');
+    const btn = form.querySelector('button[type="submit"]');
+    const errEl = parent.querySelector('.email-err');
+    const blockedEl = parent.querySelector('.email-blocked');
+
+    const showSuccess = () => {
+      form.style.display = 'none';
+      parent.querySelectorAll('.email-note, .news-prompt, .hero-add-city, .email-err, .email-blocked').forEach((el) => el.style.display = 'none');
+      const ok = parent.querySelector('.email-ok');
+      if (ok) ok.style.display = 'block';
+    };
+
+    const restoreForm = () => {
+      if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+      delete form.dataset.busy;
+    };
+
+    /* the honeypot is invisible to humans — if it's filled, a bot did it: pretend success, save nothing */
+    if (honeypot && honeypot.value) { showSuccess(); return; }
+    if (!email) return;
+
+    form.dataset.busy = '1';
+    const btnLabel = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Adding you…'; }
+    if (errEl) errEl.style.display = 'none';
+    if (blockedEl) blockedEl.style.display = 'none';
+
+    /* disposable-email gate — the same checker the app's signup screen uses
+       (signup_domain_rules, ~5,500 blocked domains). FAIL-OPEN by design:
+       if the check itself can't run, the signup still saves. */
+    try {
+      const chk = await fetch(EMAIL_CHECK_URL, {
+        method: 'POST',
+        headers: { apikey: WAITLIST_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_email: email }),
+      });
+      if (chk.ok) {
+        const verdict = await chk.json();
+        if (verdict && verdict.allowed === false) {
+          if (blockedEl) blockedEl.style.display = 'block';
+          restoreForm();
+          return;
+        }
+      }
+    } catch (gateErr) {
+      /* checker unreachable — fail open, proceed to save */
+    }
+
+    /* if the city was picked from the type-ahead (and not edited afterwards),
+       store its coordinates too — out-of-market demand becomes mappable */
+    const picked = form.dataset.cityLabel && city === form.dataset.cityLabel;
+    try {
+      const res = await fetch(WAITLIST_URL, {
+        method: 'POST',
+        headers: { apikey: WAITLIST_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({
+          email: email,
+          city: city || null,
+          latitude: picked ? Number(form.dataset.cityLat) : null,
+          longitude: picked ? Number(form.dataset.cityLng) : null,
+        }),
+      });
+      if (!res.ok) throw new Error('waitlist insert failed: HTTP ' + res.status);
+      showSuccess();
+    } catch (err) {
+      if (errEl) errEl.style.display = 'block';
+      restoreForm();
+    }
   });
 });
+
+/* city type-ahead — answers "Paris in Texas or Paris in France?" by letting the
+   visitor pick from real US cities (search_us_cities: US-only, population-ranked,
+   max 8). Picking stores coordinates; free text still submits fine if they skip it. */
+const CITY_SEARCH_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/rpc/search_us_cities';
+const cityInput = document.querySelector('#emailForm input[name="city"]');
+const cityList = document.getElementById('cityList');
+const emailFormEl = document.getElementById('emailForm');
+if (cityInput && cityList && emailFormEl) {
+  let items = [];
+  let active = -1;
+  let debounceTimer = null;
+  let inflight = null;
+
+  const close = () => {
+    cityList.classList.remove('open');
+    cityList.innerHTML = '';
+    items = [];
+    active = -1;
+    cityInput.setAttribute('aria-expanded', 'false');
+    cityInput.removeAttribute('aria-activedescendant');
+  };
+
+  const clearPick = () => {
+    delete emailFormEl.dataset.cityLabel;
+    delete emailFormEl.dataset.cityLat;
+    delete emailFormEl.dataset.cityLng;
+  };
+
+  const pick = (i) => {
+    const it = items[i];
+    if (!it) return;
+    const label = it.name + ', ' + it.admin1;
+    cityInput.value = label;
+    emailFormEl.dataset.cityLabel = label;
+    emailFormEl.dataset.cityLat = String(it.latitude);
+    emailFormEl.dataset.cityLng = String(it.longitude);
+    close();
+  };
+
+  const render = () => {
+    cityList.innerHTML = '';
+    items.forEach((it, i) => {
+      const opt = document.createElement('div');
+      opt.className = 'city-opt' + (i === active ? ' active' : '');
+      opt.setAttribute('role', 'option');
+      opt.id = 'cityOpt' + i;
+      opt.textContent = it.name + ', ' + it.admin1;  // textContent: data can never inject markup
+      opt.addEventListener('mousedown', (ev) => { ev.preventDefault(); pick(i); });
+      cityList.appendChild(opt);
+    });
+    cityList.classList.toggle('open', items.length > 0);
+    cityInput.setAttribute('aria-expanded', items.length > 0 ? 'true' : 'false');
+    if (active >= 0) cityInput.setAttribute('aria-activedescendant', 'cityOpt' + active);
+    else cityInput.removeAttribute('aria-activedescendant');
+  };
+
+  const search = async (q) => {
+    if (inflight) inflight.abort();          // supersede the stale request
+    inflight = new AbortController();
+    try {
+      const res = await fetch(CITY_SEARCH_URL, {
+        method: 'POST',
+        headers: { apikey: WAITLIST_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_query: q }),
+        signal: inflight.signal,
+      });
+      if (!res.ok) { close(); return; }
+      items = await res.json();
+      active = -1;
+      render();
+    } catch (err) {
+      /* aborted or offline — the field still works as free text */
+    }
+  };
+
+  cityInput.addEventListener('input', () => {
+    clearPick();                              // editing after a pick makes it free text again
+    const q = cityInput.value.trim();
+    clearTimeout(debounceTimer);
+    if (q.length < 2) { close(); return; }
+    debounceTimer = setTimeout(() => search(q), 250);
+  });
+
+  cityInput.addEventListener('keydown', (e) => {
+    if (!items.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % items.length; render(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + items.length) % items.length; render(); }
+    else if (e.key === 'Enter') { if (active >= 0) { e.preventDefault(); pick(active); } else close(); }
+    else if (e.key === 'Escape') { close(); }
+  });
+
+  cityInput.addEventListener('blur', () => setTimeout(close, 150));
+}
 
 /* "Add your city" toggle — reveals the city field in the signup form */
 const addCityBtn = document.getElementById('addCityBtn');
