@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | MapChat</title>
+  <meta name="description" content="MapChat Privacy Policy. What we collect, how we use it, and your rights — including your California (CCPA/CPRA) privacy rights. We do not sell your data.">
+  <link rel="canonical" href="https://mapchat.social/privacy-policy">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MapChat">
+  <meta property="og:title" content="Privacy Policy | MapChat">
+  <meta property="og:description" content="What MapChat collects, how we use it, and your privacy rights. You are not the product.">
+  <meta property="og:url" content="https://mapchat.social/privacy-policy">
+  <meta property="og:image" content="https://mapchat.social/assets/icon.png">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    :root{
+      --electric:#0040ff; --electric-bright:#1f4dff;
+      --black:#0a0a0a; --paper:#f6f5f1;
+      --hair-dark:#232323; --stroke-dark:#27324f; --surface-dark:#161616;
+      --text:#ffffff; --muted:#b6b6bf; --faint:#9aa0ad; --mute-dark:#6e7286;
+      --maxw:820px; --radius:16px;
+      --font-display:'Space Grotesk', system-ui, sans-serif;
+      --font-sys:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+      --font-mono:'Space Mono', ui-monospace, Menlo, monospace;
+      --ease:cubic-bezier(0.22,1,0.36,1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:clip}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{background:var(--black);color:var(--text);font-family:var(--font-sys);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+    ::selection{background:rgba(0,64,255,.4)}
+    a{color:var(--electric-bright);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible,summary:focus-visible{outline:2px solid var(--electric-bright);outline-offset:3px;border-radius:4px}
+    strong{color:#fff;font-weight:600}
+
+    /* ---- nav (floating pill, matches site) ---- */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding-top:14px}
+    .nav-inner{max-width:1120px;margin:0 auto;height:60px;padding:0 14px 0 22px;display:flex;align-items:center;gap:28px;border:1px solid var(--hair-dark);border-radius:9999px;background:rgba(12,12,16,.62);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);box-shadow:0 10px 30px rgba(0,0,0,.30)}
+    .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-0.02em;color:#fff}
+    .brand img{width:32px;height:32px}
+    .nav-links{display:flex;gap:24px;margin-left:auto;align-items:center}
+    .nav-links a{color:#cfcfd6;font-size:14.5px;transition:color .2s}
+    .nav-links a:hover{color:#fff;text-decoration:none}
+    .nav-cta{background:var(--electric);color:#fff;padding:10px 20px;border-radius:9999px;font-family:var(--font-display);font-weight:600;font-size:14px}
+    .nav-cta:hover{background:var(--electric-bright);text-decoration:none}
+    @media (max-width:640px){.nav-links a.text-link{display:none}}
+
+    /* ---- legal page ---- */
+    main{max-width:var(--maxw);margin:0 auto;padding:130px 24px 40px}
+    .eyebrow{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--electric-bright);display:inline-flex;align-items:center;gap:9px;margin-bottom:18px}
+    .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--electric-bright);box-shadow:0 0 12px var(--electric)}
+    h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,6vw,3.4rem);line-height:1.04;letter-spacing:-0.04em;color:#fff;margin-bottom:14px}
+    .legal-meta{color:var(--faint);font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;line-height:1.8}
+    .legal-meta .sep{color:var(--mute-dark);margin:0 8px}
+    .ccpa-badge{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:6px 14px;border:1px solid var(--stroke-dark);border-radius:9999px;background:rgba(0,64,255,.06);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--electric-bright)}
+    .ccpa-badge ion-icon{font-size:14px}
+
+    .toc{margin:40px 0 8px;border:1px solid var(--hair-dark);border-radius:var(--radius);background:var(--surface-dark);padding:24px 26px}
+    .toc h2{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-dark);font-weight:700;margin-bottom:16px}
+    .toc ol{list-style:none;counter-reset:toc;columns:2;column-gap:36px}
+    @media (max-width:600px){.toc ol{columns:1}}
+    .toc li{counter-increment:toc;margin-bottom:11px;break-inside:avoid;font-size:15px}
+    .toc li a{color:#cfcfd6}
+    .toc li a:hover{color:#fff}
+    .toc li::before{content:counter(toc,decimal-leading-zero);font-family:var(--font-mono);font-size:12px;color:var(--electric-bright);margin-right:12px}
+
+    .legal-body{margin-top:36px}
+    section.s{padding:38px 0 4px;border-top:1px solid var(--hair-dark)}
+    section.s:first-child{border-top:none}
+    .s-num{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-dark);margin-bottom:10px}
+    .s h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,3.2vw,2rem);line-height:1.15;letter-spacing:-0.02em;color:#fff;margin-bottom:18px;scroll-margin-top:90px}
+    .s h3{font-family:var(--font-display);font-weight:600;font-size:1.2rem;color:#fff;margin:26px 0 12px;letter-spacing:-0.01em}
+    .s p{color:var(--muted);margin-bottom:16px}
+    .s ul{list-style:none;margin:0 0 18px}
+    .s ul li{color:var(--muted);position:relative;padding-left:22px;margin-bottom:10px}
+    .s ul li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--electric-bright)}
+    .callout{border-left:2px solid var(--electric);background:rgba(0,64,255,.06);padding:16px 20px;border-radius:0 12px 12px 0;margin:6px 0 20px}
+    .callout p{margin:0;color:#dcdce2}
+    .callout strong{color:var(--electric-bright)}
+    .legal-note{margin-top:44px;padding-top:26px;border-top:1px solid var(--hair-dark);color:var(--mute-dark);font-size:14px;line-height:1.7}
+    .legal-note strong{color:var(--muted)}
+
+    /* ---- data table (Information We Collect) ---- */
+    .table-wrap{margin:8px 0 22px;border:1px solid var(--hair-dark);border-radius:var(--radius);overflow:hidden;overflow-x:auto}
+    .s table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:580px}
+    .s thead th{background:var(--surface-dark);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:left;padding:14px 18px;border-bottom:1px solid var(--stroke-dark)}
+    .s tbody td{color:var(--muted);padding:14px 18px;border-top:1px solid var(--hair-dark);vertical-align:top;line-height:1.55}
+    .s tbody tr:first-child td{border-top:none}
+    .s tbody td:first-child{color:#fff;font-weight:600;font-family:var(--font-display)}
+    @media (max-width:640px){.s table{font-size:13.5px}.s thead th,.s tbody td{padding:11px 13px}}
+
+    /* ---- footer (matches site) ---- */
+    footer{border-top:1px solid var(--hair-dark);background:#060608;margin-top:60px}
+    .foot-inner{max-width:1120px;margin:0 auto;padding:52px 24px 40px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;justify-content:space-between}
+    .foot-brand img{width:40px;margin-bottom:14px}
+    .foot-brand p{color:var(--faint);font-size:.95rem;max-width:34ch;line-height:1.55;margin-bottom:18px}
+    .foot-social{display:flex;gap:14px}
+    .foot-social a{width:38px;height:38px;border-radius:50%;border:1px solid var(--hair-dark);display:flex;align-items:center;justify-content:center;color:#cfcfd6;transition:all .2s}
+    .foot-social a:hover{background:var(--electric);border-color:var(--electric);color:#fff;text-decoration:none}
+    .foot-social ion-icon{font-size:18px}
+    .foot-links{display:flex;gap:48px;flex-wrap:wrap}
+    .foot-col h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-dark);margin-bottom:14px;font-weight:700}
+    .foot-col a{display:block;color:#cfcfd6;font-size:.97rem;margin-bottom:11px}
+    .foot-col a:hover{color:#fff}
+    .foot-bottom{max-width:1120px;margin:0 auto;padding:26px 24px 36px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--mute-dark);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--hair-dark)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="MapChat home"><img src="assets/icon.png" alt="MapChat butterfly logo" />MapChat</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="text-link" href="/about">About</a>
+        <a class="text-link" href="/tos">Terms</a>
+        <a class="nav-cta" href="/">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <p class="eyebrow">Legal &middot; MapChat</p>
+    <h1>Privacy Policy</h1>
+    <p class="legal-meta">Benjamin Steely-Boehlke, d/b/a MapChat<br>Effective March 30, 2026<span class="sep">&middot;</span>Last Updated March 30, 2026</p>
+    <p><span class="ccpa-badge"><ion-icon name="shield-checkmark-outline"></ion-icon>CCPA / CPRA Compliant</span></p>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#s01">Introduction &amp; Scope</a></li>
+        <li><a href="#s02">Our Principle: You Are Not the Product</a></li>
+        <li><a href="#s03">Information We Collect</a></li>
+        <li><a href="#s04">How We Use Your Information</a></li>
+        <li><a href="#s05">Sharing &amp; Disclosure</a></li>
+        <li><a href="#s06">Cookies &amp; Tracking Technologies</a></li>
+        <li><a href="#s07">Data Retention</a></li>
+        <li><a href="#s08">Your California Privacy Rights (CCPA)</a></li>
+        <li><a href="#s09">Do Not Sell or Share My Personal Information</a></li>
+        <li><a href="#s10">Data Security</a></li>
+        <li><a href="#s11">Location Data Practices</a></li>
+        <li><a href="#s12">Age Restriction &amp; Children&rsquo;s Privacy</a></li>
+        <li><a href="#s13">Third-Party Services</a></li>
+        <li><a href="#s14">Changes to This Policy</a></li>
+        <li><a href="#s15">Contact Us</a></li>
+      </ol>
+    </nav>
+
+    <article class="legal-body">
+
+      <section class="s"><p class="s-num">Section 01</p><h2 id="s01">Introduction &amp; Scope</h2>
+        <p>Welcome to MapChat (&ldquo;MapChat,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;). MapChat is a social platform available at mapchat.social and through our mobile application, enabling users to discover, rate, and share information about venues such as bars, restaurants, and other establishments.</p>
+        <p>This Privacy Policy explains what personal information we collect, how we use and protect it, and the rights you have over your data. This policy applies to all users who access or use our website, mobile app, and related services (collectively, the &ldquo;Services&rdquo;).</p>
+        <p>By creating an account or using our Services, you acknowledge that you have read and understood this Privacy Policy. If you do not agree with our practices, please do not use our Services.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 02</p><h2 id="s02">Our Principle: You Are Not the Product</h2>
+        <p>At MapChat, we hold a foundational belief that shapes every decision we make about your data: our users should never be the product. Your personal information exists to power your experience &mdash; not to be packaged, monetized, or traded behind your back.</p>
+        <h3>The MapChat Data Promise</h3>
+        <div class="callout"><p>We do not sell your personal information. We do not share it with data brokers or advertising networks. We do not use your data to build profiles for anyone other than you. <strong>We will never work with data brokers &mdash; period.</strong></p></div>
+        <p><strong>Venue partner sharing:</strong> When you visit and interact with a venue through MapChat, we share relevant information with that venue so they can serve you better &mdash; just like being a regular. If a venue belongs to a chain or group, the parent entity may see your activity across their own locations &mdash; but never at unrelated venues. You can opt out anytime. Venue partners cannot resell your data.</p>
+        <p><strong>Our line in the sand:</strong> If your personal data were ever sold to a data broker or similar entity &mdash; something we have committed to never doing &mdash; you would be entitled to compensation for the value of that data. We believe that if your information is treated as a commodity, you deserve to share in that value. This commitment exists as a safeguard and a statement of principle, even though we intend for it to never be triggered.</p>
+        <p>If we introduce personalized advertising, it will be designed to make your life better &mdash; surfacing genuinely useful, relevant content like deals at venues you love &mdash; not to extract value from you. You will always have clear controls to opt out, and we will never let third-party ad networks track you inside MapChat.</p>
+        <p>This is not a legal technicality. It is a matter of principle that guides how we build MapChat and how we intend to operate for the long term.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 03</p><h2 id="s03">Information We Collect</h2>
+        <p>We collect the following categories of personal information when you use MapChat:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Category</th><th scope="col">Examples</th><th scope="col">Source</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Account &amp; Profile Information</td><td>Name, email address, username, password, profile photo, date of birth</td><td>Provided by you at registration</td></tr>
+              <tr><td>Location Data</td><td>Precise GPS coordinates, venue check-in locations, city/region</td><td>Your device (with your permission)</td></tr>
+              <tr><td>User-Generated Content</td><td>Photos, venue reviews, feedback, comments, ratings</td><td>Provided by you</td></tr>
+              <tr><td>Venue Feedback Data</td><td>Happy hour details, parking info, dog policies, event information, corrections and suggestions about venue data</td><td>Provided by you</td></tr>
+              <tr><td>Check-In Data</td><td>Venue name, date/time of check-in, frequency of visits</td><td>Collected when you check in</td></tr>
+              <tr><td>Trivia &amp; Gameplay Data</td><td>Trivia responses, scores, game participation history, leaderboard standings</td><td>Collected during gameplay</td></tr>
+              <tr><td>Photos &amp; Media</td><td>Images uploaded for venue reviews, profile photos, event photos</td><td>Provided by you</td></tr>
+              <tr><td>Usage &amp; Analytics Data</td><td>Device type, operating system, browser type, IP address, pages viewed, features used, session duration, crash logs</td><td>Collected automatically</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout"><p><strong>Sensitive Personal Information:</strong> MapChat does not intentionally collect sensitive personal information such as Social Security numbers, financial account information, precise racial or ethnic origin, religious beliefs, or biometric data.</p></div>
+      </section>
+
+      <section class="s"><p class="s-num">Section 04</p><h2 id="s04">How We Use Your Information</h2>
+        <p>We use the personal information we collect for the following business purposes:</p>
+        <ul>
+          <li><strong>Provide and operate the Services</strong> &mdash; to create and maintain your account, enable check-ins, display venue information, and facilitate social features.</li>
+          <li><strong>Personalize your experience</strong> &mdash; to recommend venues, display relevant content, and tailor the app to your preferences and location.</li>
+          <li><strong>Improve venue data quality</strong> &mdash; to process your feedback, corrections, and suggestions about venue information such as happy hours, events, and amenities.</li>
+          <li><strong>Operate trivia and games</strong> &mdash; to facilitate gameplay, track scores, maintain leaderboards, and provide rewards or achievements.</li>
+          <li><strong>Analyze and improve our Services</strong> &mdash; to understand how users interact with MapChat, identify bugs, and develop new features.</li>
+          <li><strong>Communicate with you</strong> &mdash; to send service-related notices, respond to your inquiries, and provide customer support.</li>
+          <li><strong>Ensure safety and security</strong> &mdash; to detect fraud, enforce our Terms of Service, and protect users and venue partners.</li>
+          <li><strong>Comply with legal obligations</strong> &mdash; to meet applicable laws, regulations, and legal processes.</li>
+        </ul>
+      </section>
+
+      <section class="s"><p class="s-num">Section 05</p><h2 id="s05">Sharing &amp; Disclosure</h2>
+        <p>As stated in Our Principle, we believe your data belongs to you. MapChat is built and operated in-house. We do not sell your personal information to third parties, and we never will without your explicit opt-in consent and fair compensation. We may share your information only in the following limited circumstances:</p>
+        <ul>
+          <li><strong>With other MapChat users:</strong> Your public profile, check-ins, reviews, photos, and gameplay activity may be visible to other users in accordance with your privacy settings.</li>
+          <li><strong>Service providers:</strong> We may engage trusted service providers who assist us in operating our Services (e.g., hosting, customer support, email delivery). These providers are contractually bound to use your data only as directed by us and to maintain appropriate security measures.</li>
+          <li><strong>Legal compliance:</strong> We may disclose information if required by law, subpoena, court order, or governmental request, or to protect the rights, safety, or property of MapChat, our users, or the public.</li>
+          <li><strong>Business transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will provide notice before your personal information becomes subject to a different privacy policy.</li>
+        </ul>
+        <h3>Third-Party Data Sharing &mdash; Venue Partners Only</h3>
+        <p>The only third parties MapChat shares data with are venue partners &mdash; the bars, restaurants, and small businesses listed on our platform.</p>
+        <h3>How Venue Sharing Works</h3>
+        <p>When you have a direct relationship with a venue &mdash; for example, you check in, leave feedback, or interact with the venue through MapChat &mdash; we share information relevant to that relationship with the venue. This works the same way it does at any restaurant or bar you visit regularly: the staff gets to know you, remembers your preferences, and can offer a better experience because of it. MapChat helps facilitate that connection digitally.</p>
+        <p>Information shared with a venue partner may include your name, visit history at that venue, preferences, feedback you&rsquo;ve provided about their establishment, and other details relevant to your relationship with them. This is how MapChat creates value for both you and the small businesses you visit &mdash; and it&rsquo;s a core part of how our platform works.</p>
+        <p>A few important points:</p>
+        <ul>
+          <li><strong>Relationship-based:</strong> We only share your information with venues you&rsquo;ve actually interacted with through MapChat. A venue you&rsquo;ve never visited or engaged with will not receive your data.</li>
+          <li><strong>Scoped to your venues:</strong> A venue only sees your activity and relationship with them. If a venue is part of a chain or restaurant group, the parent entity may see your activity across their own locations &mdash; but never at unrelated venues outside their group.</li>
+          <li><strong>Easy opt-out:</strong> You can opt out of venue sharing at any time through your privacy settings, either globally or for specific venues. If you opt out, we will stop sharing your identifiable information with that venue going forward.</li>
+          <li><strong>No resale:</strong> Venue partners are contractually prohibited from selling, licensing, or sharing your information with any other party.</li>
+        </ul>
+        <p>In addition to identifiable data shared with venues you visit, we also provide venues with anonymized, aggregated insights &mdash; such as overall visit trends, general feedback themes, and engagement metrics &mdash; that cannot identify any individual user.</p>
+        <div class="callout"><p><strong>No Data Brokers. Ever.</strong> MapChat will never sell, license, or disclose your personal information to data brokers, data aggregators, advertising networks, or any entity whose business is the resale or redistribution of personal data. This is a permanent commitment, not a temporary policy. Your data will never end up in a database you didn&rsquo;t agree to be part of.</p></div>
+        <h3>Personalized Advertising</h3>
+        <p>MapChat may in the future introduce personalized advertising within the app. If we do, our approach will be guided by the same principle that governs everything else we build: it should make your life better, not just generate revenue.</p>
+        <p>Here is what that means in practice:</p>
+        <ul>
+          <li><strong>Relevance over volume:</strong> Ads will be tailored to surface genuinely useful information &mdash; such as a happy hour deal at a venue you already love, or a new restaurant in a neighborhood you frequent &mdash; not to bombard you with unrelated products.</li>
+          <li><strong>On-device where possible:</strong> We will prioritize processing ad personalization on your device or within our own systems, minimizing the personal data that ever leaves MapChat.</li>
+          <li><strong>No third-party ad tracking:</strong> We will not allow third-party advertising networks to place cookies or tracking pixels within MapChat to build independent profiles on you.</li>
+          <li><strong>Transparent controls:</strong> You will have clear, accessible settings to control your ad experience &mdash; including the ability to opt out of personalized ads entirely and receive only generic, non-targeted content instead.</li>
+          <li><strong>Honest labeling:</strong> All sponsored or promoted content will be clearly marked so you always know the difference between organic recommendations and paid placements.</li>
+        </ul>
+        <p>If and when personalized advertising is introduced, we will update this policy and notify you in advance so you can review your preferences.</p>
+        <p><strong>Categories disclosed to service providers in the past 12 months:</strong> Account identifiers (for hosting and infrastructure), usage/analytics data (for performance monitoring), and email addresses (for transactional communications). We do not currently share personal information with third parties for their own marketing or advertising purposes.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 06</p><h2 id="s06">Cookies &amp; Tracking Technologies</h2>
+        <p>MapChat uses cookies and similar tracking technologies to operate and improve our Services. These include:</p>
+        <ul>
+          <li><strong>Essential cookies:</strong> Required for authentication, security, and basic functionality. These cannot be disabled.</li>
+          <li><strong>Analytics cookies:</strong> Help us understand usage patterns, feature popularity, and app performance. We process this data in-house.</li>
+          <li><strong>Preference cookies:</strong> Store your settings, such as language preferences and display options.</li>
+        </ul>
+        <p>We do not currently use third-party advertising cookies or tracking pixels. If we introduce personalized advertising in the future, any advertising-related cookies will be clearly disclosed, require your opt-in consent, and be manageable through your privacy settings. We will never allow third-party ad networks to independently track you within MapChat. You may manage cookie preferences through your browser or device settings. Disabling certain cookies may affect the functionality of our Services.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 07</p><h2 id="s07">Data Retention</h2>
+        <p>We retain your personal information only for as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required or permitted by law. Specifically:</p>
+        <ul>
+          <li><strong>Account data:</strong> Retained for the duration of your active account and for up to 30 days following account deletion to allow for recovery.</li>
+          <li><strong>Check-in and gameplay data:</strong> Retained for the life of your account. Aggregate, de-identified statistics may be retained indefinitely.</li>
+          <li><strong>Venue feedback:</strong> Contributions to venue data (e.g., corrections, event info) may be retained in de-identified form even after account deletion to maintain data quality for the community.</li>
+          <li><strong>Usage and analytics data:</strong> Retained in identifiable form for up to 24 months, then aggregated or deleted.</li>
+          <li><strong>Legal hold data:</strong> May be retained longer if required for legal proceedings or compliance obligations.</li>
+        </ul>
+      </section>
+
+      <section class="s"><p class="s-num">Section 08</p><h2 id="s08">Your California Privacy Rights (CCPA/CPRA)</h2>
+        <p>If you are a California resident, you have the following rights under the California Consumer Privacy Act, as amended by the California Privacy Rights Act and the regulations effective January 1, 2026:</p>
+        <h3>Right to Know</h3>
+        <p>You may request that we disclose the categories and specific pieces of personal information we have collected about you, the sources of that information, the purposes for collection, and the categories of third parties with whom we have shared it. Under the 2026 regulations, you may request information collected prior to the most recent 12-month period, going back to January 1, 2022, if we still retain such data. You may specify a date range for your request.</p>
+        <h3>Right to Delete</h3>
+        <p>You may request that we delete the personal information we have collected about you, subject to certain exceptions permitted by law (such as completing a transaction, detecting security incidents, or complying with legal obligations).</p>
+        <h3>Right to Correct</h3>
+        <p>You may request that we correct inaccurate personal information that we maintain about you.</p>
+        <h3>Right to Opt-Out of Sale or Sharing</h3>
+        <p>MapChat does not sell or share your personal information as those terms are defined under the CCPA. If this practice changes in the future, we will update this policy and provide a &ldquo;Do Not Sell or Share My Personal Information&rdquo; link as required.</p>
+        <h3>Right to Limit Use of Sensitive Personal Information</h3>
+        <p>Where we collect sensitive personal information, you have the right to limit its use to what is necessary to provide the Services. Currently, MapChat does not collect sensitive personal information beyond what is necessary for core functionality.</p>
+        <h3>Right to Non-Discrimination</h3>
+        <p>We will not discriminate against you for exercising any of your CCPA rights. We will not deny you services, charge different prices, provide a different quality of service, or suggest you will receive different treatment for exercising your rights.</p>
+        <h3>How to Submit a Request</h3>
+        <p>To exercise any of the rights listed above, you may:</p>
+        <ul>
+          <li>Email us at <a href="mailto:privacy@mapchat.social">privacy@mapchat.social</a></li>
+          <li>Use the &ldquo;Privacy Settings&rdquo; section within your account in the MapChat app</li>
+        </ul>
+        <p>We will verify your identity before processing your request. Verification may include confirming your email address and matching account details. We will respond to verifiable consumer requests within 45 days. If we need additional time (up to an additional 45 days), we will notify you in writing and explain the reason for the extension.</p>
+        <h3>Authorized Agents</h3>
+        <p>You may designate an authorized agent to submit a request on your behalf. The agent must provide proof of written authorization from you, and we may still require you to verify your identity directly.</p>
+        <div class="callout"><p><strong>Opt-Out Preference Signals:</strong> MapChat honors the Global Privacy Control (GPC) and other recognized opt-out preference signals. When we detect such a signal, we will process it as a valid opt-out request and display an &ldquo;Opt-Out Request Honored&rdquo; confirmation.</p></div>
+      </section>
+
+      <section class="s"><p class="s-num">Section 09</p><h2 id="s09">Do Not Sell or Share My Personal Information</h2>
+        <p>MapChat does not sell your personal information to third parties for monetary or other valuable consideration. We also do not &ldquo;share&rdquo; your personal information with third parties for cross-context behavioral advertising as defined by the CCPA. We do not and will never work with data brokers, data aggregators, or any entity whose business model involves the resale or redistribution of personal information.</p>
+        <h3>Venue Partner Data</h3>
+        <p>As described in Section 05, MapChat shares information with venue partners you have a direct relationship with &mdash; venues you&rsquo;ve checked into, left feedback for, or otherwise interacted with through MapChat. This sharing is on by default because it&rsquo;s how venues deliver better hospitality, but you can opt out at any time. Venue partners cannot resell or redistribute any data received through MapChat.</p>
+        <h3>Data Broker Prohibition &amp; Compensation Guarantee</h3>
+        <p>MapChat will never sell, license, or disclose your personal information to data brokers, data aggregators, or any entity whose purpose is the resale or redistribution of personal data. This is a permanent, unconditional commitment.</p>
+        <div class="callout"><p>As a safeguard and a statement of principle: if your personal data were ever sold to a data broker or similar entity in violation of this commitment, <strong>you would be entitled to compensation for the value of your data.</strong> We believe that if anyone ever treats your information as a commodity to be traded, you deserve to share in that value. We intend for this guarantee to never be triggered &mdash; but it exists to hold us accountable.</p></div>
+        <p>These commitments go beyond what the CCPA requires. They reflect our belief that your data is yours, and that trust is earned through actions, not disclaimers.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 10</p><h2 id="s10">Data Security</h2>
+        <p>We implement reasonable and appropriate administrative, technical, and physical safeguards designed to protect your personal information from unauthorized access, disclosure, alteration, and destruction. These measures include:</p>
+        <ul>
+          <li>Encryption of data in transit (TLS/SSL) and at rest</li>
+          <li>Access controls limiting employee access to personal information on a need-to-know basis</li>
+          <li>Regular security assessments and vulnerability testing</li>
+          <li>Secure password hashing and storage</li>
+          <li>Incident response procedures for potential data breaches</li>
+        </ul>
+        <p>While we take commercially reasonable steps to protect your data, no method of electronic transmission or storage is 100% secure. We cannot guarantee absolute security.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 11</p><h2 id="s11">Location Data Practices</h2>
+        <p>Location data is central to MapChat&rsquo;s functionality. Here is how we handle it:</p>
+        <ul>
+          <li><strong>Consent:</strong> We collect precise location data only when you grant permission through your device&rsquo;s operating system. You can revoke this permission at any time through your device settings.</li>
+          <li><strong>Purpose:</strong> Location data is used to power nearby venue discovery, check-in functionality, and personalized recommendations. We may use Apple Maps or Google Maps services to process location queries such as geocoding and mapping display.</li>
+          <li><strong>Storage:</strong> Your precise location is used in real-time for venue discovery. Check-in locations (venue-level, not continuous GPS tracking) are stored with your account. We do not continuously track your location in the background unless you explicitly enable this feature.</li>
+          <li><strong>De-identification:</strong> For analytics purposes, we aggregate and de-identify location data so that it cannot be used to identify individual users.</li>
+        </ul>
+      </section>
+
+      <section class="s"><p class="s-num">Section 12</p><h2 id="s12">Age Restriction &amp; Children&rsquo;s Privacy</h2>
+        <p>MapChat is intended solely for users who are 18 years of age or older. We do not knowingly collect personal information from anyone under the age of 18.</p>
+        <p>If we become aware that we have collected personal information from a user under 18, we will take prompt steps to delete that information and terminate the associated account. If you believe a minor has provided us with personal information, please contact us immediately at <a href="mailto:privacy@mapchat.social">privacy@mapchat.social</a>.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 13</p><h2 id="s13">Third-Party Services</h2>
+        <p>MapChat may use the following third-party services in a limited capacity:</p>
+        <p><strong>Apple Maps / Google Maps:</strong> Used for location-related features such as geocoding, map display, and venue positioning. When you use map features, your device may transmit location queries to Apple or Google in accordance with their respective privacy policies. We encourage you to review Google&rsquo;s Privacy Policy and Apple&rsquo;s Privacy Policy.</p>
+        <p>Aside from the mapping services described above, MapChat&rsquo;s infrastructure is built and operated in-house. We do not embed third-party advertising networks, social media trackers, or analytics platforms that independently collect your data.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 14</p><h2 id="s14">Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or for other operational reasons. When we make material changes, we will:</p>
+        <ul>
+          <li>Update the &ldquo;Last Updated&rdquo; date at the top of this page</li>
+          <li>Provide notice through the MapChat app or via email to your registered address</li>
+          <li>Where required by law, obtain your consent before applying changes</li>
+        </ul>
+        <p>We encourage you to review this policy periodically. Your continued use of MapChat after changes become effective constitutes your acceptance of the revised policy.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 15</p><h2 id="s15">Contact Us</h2>
+        <p>If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us:</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:privacy@mapchat.social">privacy@mapchat.social</a></li>
+          <li><strong>Website:</strong> <a href="https://mapchat.social">mapchat.social</a></li>
+          <li><strong>Mailing Address:</strong> Benjamin Steely-Boehlke, d/b/a MapChat, 12821 Sarah St., Studio City, CA 91604</li>
+        </ul>
+        <p>For CCPA-specific requests, please include &ldquo;CCPA Request&rdquo; in the subject line of your email and provide sufficient information for us to verify your identity.</p>
+        <p>We aim to respond to all privacy inquiries within 10 business days.</p>
+      </section>
+
+      <p class="legal-note">&copy; 2026 Benjamin Steely-Boehlke, d/b/a MapChat. All rights reserved.<br><br><strong>This privacy policy is provided for informational purposes and does not constitute legal advice.</strong> Consult with a qualified attorney for legal guidance specific to your situation.</p>
+
+    </article>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <img src="assets/icon.png" alt="MapChat" />
+        <p>The social app for third places. Made with conviction in Los Angeles. Come out and play.</p>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mapchatsocial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+          <a href="https://www.tiktok.com/@mapchat" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><ion-icon name="logo-tiktok"></ion-icon></a>
+          <a href="https://www.linkedin.com/company/mapchatsocial/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="https://apps.apple.com/us/app/mapchat-social/id6761695226" target="_blank" rel="noopener noreferrer">iOS App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.mapchat.mobile&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer">Google Play</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="mailto:hello@mapchat.social">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/tos">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 MapChat. Come out and play.</span>
+      <span>mapchat.social</span>
+    </div>
+  </footer>
+</body>
+</html>

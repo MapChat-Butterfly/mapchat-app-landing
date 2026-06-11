@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | MapChat</title>
+  <meta name="description" content="MapChat Terms of Service. The agreement that governs your use of the MapChat app and mapchat.social.">
+  <link rel="canonical" href="https://mapchat.social/tos">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MapChat">
+  <meta property="og:title" content="Terms of Service | MapChat">
+  <meta property="og:description" content="The agreement that governs your use of MapChat.">
+  <meta property="og:url" content="https://mapchat.social/tos">
+  <meta property="og:image" content="https://mapchat.social/assets/icon.png">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    :root{
+      --electric:#0040ff; --electric-bright:#1f4dff;
+      --black:#0a0a0a; --paper:#f6f5f1;
+      --hair-dark:#232323; --stroke-dark:#27324f; --surface-dark:#161616;
+      --text:#ffffff; --muted:#b6b6bf; --faint:#9aa0ad; --mute-dark:#6e7286;
+      --maxw:820px; --radius:16px;
+      --font-display:'Space Grotesk', system-ui, sans-serif;
+      --font-sys:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+      --font-mono:'Space Mono', ui-monospace, Menlo, monospace;
+      --ease:cubic-bezier(0.22,1,0.36,1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:clip}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{background:var(--black);color:var(--text);font-family:var(--font-sys);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+    ::selection{background:rgba(0,64,255,.4)}
+    a{color:var(--electric-bright);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible,summary:focus-visible{outline:2px solid var(--electric-bright);outline-offset:3px;border-radius:4px}
+    strong{color:#fff;font-weight:600}
+
+    /* ---- nav (floating pill, matches site) ---- */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding-top:14px}
+    .nav-inner{max-width:1120px;margin:0 auto;height:60px;padding:0 14px 0 22px;display:flex;align-items:center;gap:28px;border:1px solid var(--hair-dark);border-radius:9999px;background:rgba(12,12,16,.62);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);box-shadow:0 10px 30px rgba(0,0,0,.30)}
+    .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-0.02em;color:#fff}
+    .brand img{width:32px;height:32px}
+    .nav-links{display:flex;gap:24px;margin-left:auto;align-items:center}
+    .nav-links a{color:#cfcfd6;font-size:14.5px;transition:color .2s}
+    .nav-links a:hover{color:#fff;text-decoration:none}
+    .nav-cta{background:var(--electric);color:#fff;padding:10px 20px;border-radius:9999px;font-family:var(--font-display);font-weight:600;font-size:14px}
+    .nav-cta:hover{background:var(--electric-bright);text-decoration:none}
+    @media (max-width:640px){.nav-links a.text-link{display:none}}
+
+    /* ---- legal page ---- */
+    main{max-width:var(--maxw);margin:0 auto;padding:130px 24px 40px}
+    .eyebrow{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--electric-bright);display:inline-flex;align-items:center;gap:9px;margin-bottom:18px}
+    .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--electric-bright);box-shadow:0 0 12px var(--electric)}
+    h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,6vw,3.4rem);line-height:1.04;letter-spacing:-0.04em;color:#fff;margin-bottom:14px}
+    .legal-meta{color:var(--faint);font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;line-height:1.8}
+    .legal-meta .sep{color:var(--mute-dark);margin:0 8px}
+
+    .toc{margin:40px 0 8px;border:1px solid var(--hair-dark);border-radius:var(--radius);background:var(--surface-dark);padding:24px 26px}
+    .toc h2{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-dark);font-weight:700;margin-bottom:16px}
+    .toc ol{list-style:none;counter-reset:toc;columns:2;column-gap:36px}
+    @media (max-width:600px){.toc ol{columns:1}}
+    .toc li{counter-increment:toc;margin-bottom:11px;break-inside:avoid;font-size:15px}
+    .toc li a{color:#cfcfd6}
+    .toc li a:hover{color:#fff}
+    .toc li::before{content:counter(toc,decimal-leading-zero);font-family:var(--font-mono);font-size:12px;color:var(--electric-bright);margin-right:12px}
+
+    .legal-body{margin-top:36px}
+    section.s{padding:38px 0 4px;border-top:1px solid var(--hair-dark)}
+    section.s:first-child{border-top:none}
+    .s-num{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-dark);margin-bottom:10px}
+    .s h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,3.2vw,2rem);line-height:1.15;letter-spacing:-0.02em;color:#fff;margin-bottom:18px;scroll-margin-top:90px}
+    .s h3{font-family:var(--font-display);font-weight:600;font-size:1.2rem;color:#fff;margin:26px 0 12px;letter-spacing:-0.01em}
+    .s p{color:var(--muted);margin-bottom:16px}
+    .s ul{list-style:none;margin:0 0 18px}
+    .s ul li{color:var(--muted);position:relative;padding-left:22px;margin-bottom:10px}
+    .s ul li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--electric-bright)}
+    .callout{border-left:2px solid var(--electric);background:rgba(0,64,255,.06);padding:16px 20px;border-radius:0 12px 12px 0;margin:6px 0 20px}
+    .callout p{margin:0;color:#dcdce2}
+    .callout strong{color:var(--electric-bright)}
+    .legal-note{margin-top:44px;padding-top:26px;border-top:1px solid var(--hair-dark);color:var(--mute-dark);font-size:14px;line-height:1.7}
+    .legal-note strong{color:var(--muted)}
+
+    /* ---- footer (matches site) ---- */
+    footer{border-top:1px solid var(--hair-dark);background:#060608;margin-top:60px}
+    .foot-inner{max-width:1120px;margin:0 auto;padding:52px 24px 40px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;justify-content:space-between}
+    .foot-brand img{width:40px;margin-bottom:14px}
+    .foot-brand p{color:var(--faint);font-size:.95rem;max-width:34ch;line-height:1.55;margin-bottom:18px}
+    .foot-social{display:flex;gap:14px}
+    .foot-social a{width:38px;height:38px;border-radius:50%;border:1px solid var(--hair-dark);display:flex;align-items:center;justify-content:center;color:#cfcfd6;transition:all .2s}
+    .foot-social a:hover{background:var(--electric);border-color:var(--electric);color:#fff;text-decoration:none}
+    .foot-social ion-icon{font-size:18px}
+    .foot-links{display:flex;gap:48px;flex-wrap:wrap}
+    .foot-col h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-dark);margin-bottom:14px;font-weight:700}
+    .foot-col a{display:block;color:#cfcfd6;font-size:.97rem;margin-bottom:11px}
+    .foot-col a:hover{color:#fff}
+    .foot-bottom{max-width:1120px;margin:0 auto;padding:26px 24px 36px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--mute-dark);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--hair-dark)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="MapChat home"><img src="assets/icon.png" alt="MapChat butterfly logo" />MapChat</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="text-link" href="/about">About</a>
+        <a class="text-link" href="/privacy-policy">Privacy</a>
+        <a class="nav-cta" href="/">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <p class="eyebrow">Legal &middot; MapChat</p>
+    <h1>Terms of Service</h1>
+    <p class="legal-meta">Benjamin Steely-Boehlke, d/b/a MapChat<br>Effective March 30, 2026<span class="sep">&middot;</span>Last Updated March 30, 2026</p>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#s01">Acceptance of Terms</a></li>
+        <li><a href="#s02">Eligibility</a></li>
+        <li><a href="#s03">Your Account</a></li>
+        <li><a href="#s04">Description of Services</a></li>
+        <li><a href="#s05">User Content &amp; Conduct</a></li>
+        <li><a href="#s06">Venue Data &amp; Community Contributions</a></li>
+        <li><a href="#s07">Trivia, Games &amp; Leaderboards</a></li>
+        <li><a href="#s08">Intellectual Property</a></li>
+        <li><a href="#s09">Prohibited Conduct</a></li>
+        <li><a href="#s10">Venue Partner Relationships</a></li>
+        <li><a href="#s11">Disclaimers &amp; Limitation of Liability</a></li>
+        <li><a href="#s12">Indemnification</a></li>
+        <li><a href="#s13">Termination</a></li>
+        <li><a href="#s14">Dispute Resolution &amp; Governing Law</a></li>
+        <li><a href="#s15">Changes to These Terms</a></li>
+        <li><a href="#s16">Contact Us</a></li>
+      </ol>
+    </nav>
+
+    <article class="legal-body">
+
+      <section class="s"><p class="s-num">Section 01</p><h2 id="s01">Acceptance of Terms</h2>
+        <p>Welcome to MapChat. These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the MapChat platform, including our website at mapchat.social, our mobile application, and all related services (collectively, the &ldquo;Services&rdquo;), operated by Benjamin Steely-Boehlke, d/b/a MapChat (&ldquo;MapChat,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).</p>
+        <p>By creating an account, accessing, or using our Services, you agree to be bound by these Terms, our Privacy Policy, and any additional terms that may apply to specific features. If you do not agree to these Terms, do not use our Services.</p>
+        <div class="callout"><p><strong>Plain language:</strong> These Terms are a legal agreement between you and MapChat. We&rsquo;ve tried to make them readable, but they are binding. If something is unclear, please reach out to us at privacy@mapchat.social before using the Services.</p></div>
+      </section>
+
+      <section class="s"><p class="s-num">Section 02</p><h2 id="s02">Eligibility</h2>
+        <p>You must be at least 18 years of age to create an account or use MapChat. By using our Services, you represent and warrant that you meet this age requirement and have the legal capacity to enter into these Terms.</p>
+        <p>If we learn that a user is under 18, we will promptly terminate their account and delete their personal information in accordance with our Privacy Policy.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 03</p><h2 id="s03">Your Account</h2>
+        <p>To use most features of MapChat, you must create an account. You agree to:</p>
+        <ul>
+          <li>Provide accurate, current, and complete information during registration</li>
+          <li>Keep your account credentials secure and confidential</li>
+          <li>Notify us immediately of any unauthorized access to your account</li>
+          <li>Not share your account or transfer it to another person without our consent</li>
+        </ul>
+        <p>You are responsible for all activity that occurs under your account. MapChat is not liable for any loss or damage arising from unauthorized use of your account.</p>
+        <p>You may delete your account at any time through the app settings. Upon deletion, we will handle your data as described in our Privacy Policy, including a 30-day recovery window.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 04</p><h2 id="s04">Description of Services</h2>
+        <p>MapChat is a social platform for discovering, reviewing, and sharing information about venues &mdash; including bars, restaurants, and other establishments. Our Services include:</p>
+        <ul>
+          <li><strong>Venue discovery:</strong> Browse, search, and explore venues based on location, category, events, and community feedback.</li>
+          <li><strong>Check-ins:</strong> Record visits to venues and share your activity with other users.</li>
+          <li><strong>Reviews &amp; feedback:</strong> Submit ratings, reviews, photos, and data corrections for venues.</li>
+          <li><strong>Events &amp; specials:</strong> Discover happy hours, events, and promotions at venues near you.</li>
+          <li><strong>Games &amp; trivia:</strong> Participate in trivia, icebreakers, and other interactive features.</li>
+          <li><strong>Social features:</strong> Connect with other users, participate in group chats, and engage with the MapChat community.</li>
+        </ul>
+        <p>We may modify, suspend, or discontinue any part of the Services at any time, with or without notice. We will make reasonable efforts to notify you of material changes that affect your use of the platform.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 05</p><h2 id="s05">User Content &amp; Conduct</h2>
+        <h3>Your Content</h3>
+        <p>&ldquo;User Content&rdquo; means any text, photos, reviews, ratings, feedback, comments, or other materials you submit through MapChat. You retain ownership of your User Content. However, by posting User Content, you grant MapChat a worldwide, non-exclusive, royalty-free, sublicensable, and transferable license to use, reproduce, modify, display, distribute, and create derivative works from your User Content in connection with operating and improving the Services.</p>
+        <p>This license continues even if you stop using the Services, but only for User Content that has been shared publicly or with venue partners. If you delete your account, we will remove your identifiable User Content from public display, though de-identified contributions (such as venue data corrections) may persist as described in our Privacy Policy.</p>
+        <h3>Content Standards</h3>
+        <p>You agree that your User Content will not:</p>
+        <ul>
+          <li>Be false, misleading, defamatory, or fraudulent</li>
+          <li>Infringe any third party&rsquo;s intellectual property, privacy, or other rights</li>
+          <li>Contain hate speech, threats, harassment, or discriminatory language</li>
+          <li>Include sexually explicit, violent, or otherwise objectionable material</li>
+          <li>Contain spam, advertising, or solicitations not authorized by MapChat</li>
+          <li>Violate any applicable law or regulation</li>
+        </ul>
+        <p>We reserve the right to remove any User Content that violates these standards, at our sole discretion and without prior notice.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 06</p><h2 id="s06">Venue Data &amp; Community Contributions</h2>
+        <p>A core part of MapChat is community-contributed venue data &mdash; including happy hour details, event information, parking info, dog policies, and other practical details that help users discover great places.</p>
+        <p>When you contribute venue data:</p>
+        <ul>
+          <li>You represent that the information is accurate to the best of your knowledge</li>
+          <li>You grant MapChat the right to use, display, modify, and share this data as part of the Services, including with venue partners</li>
+          <li>You understand that venue data contributions may be retained in de-identified form even after account deletion, to maintain the quality and completeness of our venue database for the community</li>
+        </ul>
+        <p>MapChat does not guarantee the accuracy, completeness, or timeliness of any venue data. Venue information &mdash; including hours, prices, events, and policies &mdash; may change without notice. Always confirm details directly with the venue.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 07</p><h2 id="s07">Trivia, Games &amp; Leaderboards</h2>
+        <p>MapChat offers interactive features including trivia, icebreakers, and other games. By participating, you agree that:</p>
+        <ul>
+          <li>Your gameplay data (scores, responses, participation history) will be collected and may be displayed on leaderboards visible to other users</li>
+          <li>MapChat may use gameplay data to improve the Services and develop new features</li>
+          <li>Any rewards, badges, or achievements earned through games have no monetary value and are not redeemable for cash unless explicitly stated</li>
+          <li>MapChat reserves the right to modify game rules, scoring, and rewards at any time</li>
+        </ul>
+        <p>You agree not to use automated tools, bots, or exploits to manipulate games or leaderboards. Violations may result in account suspension or termination.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 08</p><h2 id="s08">Intellectual Property</h2>
+        <p>The MapChat name, logo (including the butterfly design), trademarks, and all content, features, and functionality of the Services &mdash; including software, design, text, graphics, and the overall look and feel &mdash; are owned by MapChat and are protected by copyright, trademark, and other intellectual property laws.</p>
+        <p>You may not copy, modify, distribute, sell, or create derivative works based on MapChat&rsquo;s intellectual property without our prior written consent.</p>
+        <p>These Terms do not grant you any right, title, or interest in the Services or our content, except for the limited right to use the Services as described in these Terms.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 09</p><h2 id="s09">Prohibited Conduct</h2>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Use the Services for any unlawful purpose or in violation of these Terms</li>
+          <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity</li>
+          <li>Scrape, crawl, or use automated tools to collect data from the Services without our written permission</li>
+          <li>Interfere with or disrupt the Services, servers, or networks connected to the Services</li>
+          <li>Attempt to gain unauthorized access to any part of the Services, other accounts, or computer systems</li>
+          <li>Use the Services to send spam, chain letters, or unsolicited communications</li>
+          <li>Upload viruses, malware, or other harmful code</li>
+          <li>Manipulate check-in data, reviews, or gameplay through fraudulent means</li>
+          <li>Create multiple accounts to circumvent restrictions or bans</li>
+          <li>Use the Services in any way that could damage, disable, or impair MapChat&rsquo;s infrastructure</li>
+        </ul>
+        <p>Violation of these rules may result in immediate suspension or termination of your account, at our sole discretion.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 10</p><h2 id="s10">Venue Partner Relationships</h2>
+        <p>MapChat may share your information with venue partners as described in our Privacy Policy. By using the Services and interacting with venues (through check-ins, feedback, or other features), you acknowledge that:</p>
+        <ul>
+          <li>Venue partners are independent third parties, not employees, agents, or affiliates of MapChat</li>
+          <li>MapChat is not responsible for the actions, products, services, or policies of any venue</li>
+          <li>Venue information displayed on MapChat (hours, menus, prices, events) is provided for informational purposes and may not be current or accurate</li>
+          <li>Any disputes between you and a venue should be resolved directly with the venue</li>
+        </ul>
+        <p>You can manage your venue data sharing preferences at any time through the Privacy Settings in your MapChat account, as detailed in our Privacy Policy.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 11</p><h2 id="s11">Disclaimers &amp; Limitation of Liability</h2>
+        <h3>Disclaimers</h3>
+        <p>THE SERVICES ARE PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+        <p>MapChat does not warrant that the Services will be uninterrupted, error-free, secure, or free of viruses or other harmful components. We do not warrant the accuracy, completeness, or reliability of any content, venue data, or information obtained through the Services.</p>
+        <h3>Limitation of Liability</h3>
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, MAPCHAT AND ITS OWNER, OFFICERS, EMPLOYEES, AGENTS, AND AFFILIATES SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, DATA, USE, OR GOODWILL, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE SERVICES, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), OR ANY OTHER LEGAL THEORY.</p>
+        <p>OUR TOTAL LIABILITY FOR ANY CLAIMS ARISING FROM OR RELATING TO THESE TERMS OR THE SERVICES SHALL NOT EXCEED THE AMOUNT YOU PAID TO MAPCHAT, IF ANY, DURING THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR ONE HUNDRED DOLLARS ($100), WHICHEVER IS GREATER.</p>
+        <p>Some jurisdictions do not allow the exclusion of certain warranties or the limitation of liability for certain damages. In such jurisdictions, our liability shall be limited to the greatest extent permitted by law.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 12</p><h2 id="s12">Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless MapChat and its owner, officers, employees, agents, and affiliates from and against any claims, liabilities, damages, losses, costs, or expenses (including reasonable attorneys&rsquo; fees) arising out of or in any way connected with:</p>
+        <ul>
+          <li>Your use of the Services</li>
+          <li>Your User Content</li>
+          <li>Your violation of these Terms</li>
+          <li>Your violation of any law or the rights of any third party</li>
+        </ul>
+      </section>
+
+      <section class="s"><p class="s-num">Section 13</p><h2 id="s13">Termination</h2>
+        <p>You may stop using MapChat and delete your account at any time. We may also suspend or terminate your account at any time, with or without cause and with or without notice, if we believe you have violated these Terms or for any other reason at our sole discretion.</p>
+        <p>Upon termination:</p>
+        <ul>
+          <li>Your right to use the Services will immediately cease</li>
+          <li>We will handle your data as described in our Privacy Policy, including the 30-day account recovery window</li>
+          <li>Sections of these Terms that by their nature should survive termination will continue to apply, including intellectual property, disclaimers, limitation of liability, indemnification, and dispute resolution</li>
+        </ul>
+      </section>
+
+      <section class="s"><p class="s-num">Section 14</p><h2 id="s14">Dispute Resolution &amp; Governing Law</h2>
+        <p>These Terms are governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions.</p>
+        <h3>Informal Resolution</h3>
+        <p>Before filing any formal legal action, you agree to first contact us at privacy@mapchat.social and attempt to resolve the dispute informally for at least 30 days. Most concerns can be resolved quickly through direct communication.</p>
+        <h3>Jurisdiction</h3>
+        <p>If informal resolution is not successful, any legal action or proceeding arising out of or relating to these Terms shall be brought exclusively in the state or federal courts located in Los Angeles County, California. You consent to the personal jurisdiction of such courts.</p>
+        <h3>Class Action Waiver</h3>
+        <p>To the extent permitted by law, you agree that any dispute resolution proceedings will be conducted on an individual basis and not as part of a class, consolidated, or representative action.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 15</p><h2 id="s15">Changes to These Terms</h2>
+        <p>We may update these Terms from time to time. When we make material changes, we will:</p>
+        <ul>
+          <li>Update the &ldquo;Last Updated&rdquo; date at the top of this page</li>
+          <li>Notify you through the MapChat app or via email</li>
+          <li>Where required by law, obtain your consent before changes take effect</li>
+        </ul>
+        <p>Your continued use of MapChat after changes become effective constitutes your acceptance of the revised Terms. If you do not agree to the updated Terms, you should stop using the Services and delete your account.</p>
+      </section>
+
+      <section class="s"><p class="s-num">Section 16</p><h2 id="s16">Contact Us</h2>
+        <p>If you have questions about these Terms of Service, please contact us:</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:privacy@mapchat.social">privacy@mapchat.social</a></li>
+          <li><strong>Website:</strong> <a href="https://mapchat.social">mapchat.social</a></li>
+          <li><strong>Mailing Address:</strong> Benjamin Steely-Boehlke, d/b/a MapChat, 12821 Sarah St., Studio City, CA 91604</li>
+        </ul>
+      </section>
+
+      <p class="legal-note">&copy; 2026 Benjamin Steely-Boehlke, d/b/a MapChat. All rights reserved.<br><br><strong>These terms are provided for informational purposes and do not constitute legal advice.</strong> Consult with a qualified attorney for legal guidance specific to your situation.</p>
+
+    </article>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <img src="assets/icon.png" alt="MapChat" />
+        <p>The social app for third places. Made with conviction in Los Angeles. Come out and play.</p>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mapchatsocial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+          <a href="https://www.tiktok.com/@mapchat" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><ion-icon name="logo-tiktok"></ion-icon></a>
+          <a href="https://www.linkedin.com/company/mapchatsocial/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="https://apps.apple.com/us/app/mapchat-social/id6761695226" target="_blank" rel="noopener noreferrer">iOS App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.mapchat.mobile&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer">Google Play</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="mailto:hello@mapchat.social">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/tos">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 MapChat. Come out and play.</span>
+      <span>mapchat.social</span>
+    </div>
+  </footer>
+</body>
+</html>
