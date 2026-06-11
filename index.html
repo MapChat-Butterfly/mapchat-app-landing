@@ -596,6 +596,7 @@ p{line-height:1.5}
 }
 .final .scribble2{position:absolute;font-family:var(--font-hand);color:var(--electric-bright);font-size:24px;opacity:.9}
 .final h2{font-size:clamp(40px,6.5vw,82px);letter-spacing:-0.045em;line-height:0.95}
+.final h2 .play{color:var(--electric);position:relative;white-space:nowrap;text-shadow:3px 4px 0 #fff, 0 0 30px rgba(255,255,255,.25)}
 .final .fsub{font-family:var(--font-sys);font-size:19px;color:#c5c5cd;max-width:520px;margin:24px auto 0;line-height:1.55}
 .final .badges{justify-content:center;margin-top:36px}
 .email-form{display:flex;gap:10px;max-width:480px;margin:34px auto 0;flex-wrap:wrap;justify-content:center}
@@ -607,7 +608,8 @@ p{line-height:1.5}
 .email-form input::placeholder{color:#8a8a93}
 .email-form input:focus{border-color:var(--electric)}
 .email-note{font-family:var(--font-sys);font-size:13px;color:var(--mute-dark);margin-top:16px}
-.email-ok{color:var(--wiggles);font-family:var(--font-sys);font-weight:600;margin-top:18px;display:none}
+.email-ok{color:var(--electric-bright);font-family:var(--font-sys);font-weight:600;margin-top:18px;display:none}
+.email-ok .ok-icon{width:2.5em;height:2.5em;vertical-align:-0.95em;margin:0 1px}
 .email-err{color:#ff8087;font-family:var(--font-sys);font-size:14px;font-weight:600;margin-top:14px;display:none}
 .email-blocked{color:#ffc24a;font-family:var(--font-sys);font-size:14px;font-weight:600;margin-top:14px;display:none}
 /* honeypot: parked far off-screen so humans never see it; bots auto-filling every field reveal themselves */
@@ -1118,7 +1120,7 @@ p{line-height:1.5}
   <div class="wrap">
     <div class="reveal">
       <span class="scribble2" style="position:static;display:inline-block;margin-bottom:14px">your next night out is already happening</span>
-      <h2>Come out <span class="em">and play.</span></h2>
+      <h2>Come out and <span class="play">PLAY.</span></h2>
       <p class="fsub">Download MapChat, open the map, and find your way into the room. Tonight's the easy part now.</p>
       <div class="badges">
         <a href="https://apps.apple.com/us/app/mapchat-social/id6761695226" class="store" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
@@ -1141,10 +1143,10 @@ p{line-height:1.5}
           </span>
           <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button type="button" class="hero-add-city" id="addCityBtn"><ion-icon name="add-circle-outline"></ion-icon> Add your city</button>
-          <button type="submit" class="btn btn-primary">Keep me posted</button>
+          <button type="submit" class="btn btn-primary">Save me a spot</button>
         </form>
         <div class="email-note">No spam, just new cities, new games, and the occasional nudge to go outside.</div>
-        <div class="email-ok" id="emailOk">You're on the list 👋 We'll let you know when your city lights up.</div>
+        <div class="email-ok" id="emailOk">See you out there <svg class="ok-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="rotate(-13 24 26)"><path d="M12.5 14.5h9l-1.1 11.2a3.3 3.3 0 0 1-6.8 0z" fill="#6fb8ff"/><rect x="16.4" y="28" width="1.6" height="6.5" rx=".8" fill="#6fb8ff"/><rect x="13" y="34" width="8.4" height="2.2" rx="1.1" fill="#6fb8ff"/></g><g transform="rotate(13 24 26)"><path d="M26.5 14.5h9l-1.1 11.2a3.3 3.3 0 0 1-6.8 0z" fill="#3f7fff"/><rect x="30.4" y="28" width="1.6" height="6.5" rx=".8" fill="#3f7fff"/><rect x="27" y="34" width="8.4" height="2.2" rx="1.1" fill="#3f7fff"/></g><path d="M24 7.5v3.2M20.8 9.4l1.7 1.7M27.2 9.4l-1.7 1.7" stroke="#ffd56b" stroke-width="1.9" stroke-linecap="round"/></svg> We'll buzz you the second your city's live.</div>
         <div class="email-err" id="emailErr">Hmm, that didn't go through. Mind trying again in a moment?</div>
         <div class="email-blocked" id="emailBlocked">That looks like a disposable email address — mind using a real one? That's where the heads-up lands.</div>
       </div>
