@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- iOS Smart App Banner: native "View in App Store" bar on iPhone Safari -->
+  <meta name="apple-itunes-app" content="app-id=6761695226">
   <title>Privacy Policy | MapChat</title>
   <meta name="description" content="MapChat Privacy Policy. What we collect, how we use it, and your rights — including your California (CCPA/CPRA) privacy rights. We do not sell your data.">
   <link rel="canonical" href="https://mapchat.social/privacy-policy">
@@ -13,8 +15,14 @@
   <meta property="og:title" content="Privacy Policy | MapChat">
   <meta property="og:description" content="What MapChat collects, how we use it, and your privacy rights. You are not the product.">
   <meta property="og:url" content="https://mapchat.social/privacy-policy">
-  <meta property="og:image" content="https://mapchat.social/assets/icon.png">
+  <meta property="og:image" content="https://mapchat.social/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://mapchat.social/assets/og-image.png">
   <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +123,10 @@
     .foot-col a:hover{color:#fff}
     .foot-bottom{max-width:1120px;margin:0 auto;padding:26px 24px 36px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--mute-dark);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--hair-dark)}
   </style>
+
+  <!-- Cloudflare Web Analytics — cookieless; beacon token configured in assets/analytics.js -->
+  <script defer src="assets/analytics.js"></script>
+  <script defer src="assets/track-store-clicks.js"></script>
 </head>
 <body>
   <header class="nav">
@@ -332,7 +344,8 @@
       <section class="s"><p class="s-num">Section 13</p><h2 id="s13">Third-Party Services</h2>
         <p>MapChat may use the following third-party services in a limited capacity:</p>
         <p><strong>Apple Maps / Google Maps:</strong> Used for location-related features such as geocoding, map display, and venue positioning. When you use map features, your device may transmit location queries to Apple or Google in accordance with their respective privacy policies. We encourage you to review Google&rsquo;s Privacy Policy and Apple&rsquo;s Privacy Policy.</p>
-        <p>Aside from the mapping services described above, MapChat&rsquo;s infrastructure is built and operated in-house. We do not embed third-party advertising networks, social media trackers, or analytics platforms that independently collect your data.</p>
+        <p>Aside from the mapping services described above and the privacy-first website analytics described below, MapChat&rsquo;s infrastructure is built and operated in-house. We do not embed third-party advertising networks or social media trackers.</p>
+        <p><strong>Website analytics (Cloudflare):</strong> Our marketing website (mapchat.social) uses Cloudflare Web Analytics, a privacy-first, cookieless service, to measure aggregate traffic (page views, referrers, approximate country, and device type) and page performance. It sets no cookies, does not track you across other websites, and does not collect information that identifies you personally. We also keep our own aggregate, non-identifying count of how often visitors tap our app-store links.</p>
       </section>
 
       <section class="s"><p class="s-num">Section 14</p><h2 id="s14">Changes to This Policy</h2>
