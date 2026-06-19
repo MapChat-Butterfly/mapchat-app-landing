@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- iOS Smart App Banner: native "View in App Store" bar on iPhone Safari -->
+  <meta name="apple-itunes-app" content="app-id=6761695226">
 
   <!-- Primary SEO -->
   <title>About MapChat | The Social App for Third Places</title>
@@ -17,15 +19,19 @@
   <meta property="og:title" content="About MapChat | The Social App for Third Places">
   <meta property="og:description" content="The cure for loneliness has an address. MapChat maps the third places around you and helps the strangers inside them become friends.">
   <meta property="og:url" content="https://mapchat.social/about">
-  <meta property="og:image" content="https://mapchat.social/assets/icon.png">
+  <meta property="og:image" content="https://mapchat.social/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About MapChat | The Social App for Third Places">
   <meta name="twitter:description" content="The cure for loneliness has an address. MapChat maps the third places around you and helps the strangers inside them become friends.">
-  <meta name="twitter:image" content="https://mapchat.social/assets/icon.png">
+  <meta name="twitter:image" content="https://mapchat.social/assets/og-image.png">
   <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <!-- Structured data: Organization -->
   <script type="application/ld+json">
@@ -300,6 +306,10 @@
     .reveal.in{opacity:1;transform:none}
     @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
   </style>
+
+  <!-- Cloudflare Web Analytics — cookieless; beacon token configured in assets/analytics.js -->
+  <script defer src="assets/analytics.js"></script>
+  <script defer src="assets/track-store-clicks.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>

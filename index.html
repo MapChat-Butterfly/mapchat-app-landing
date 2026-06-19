@@ -3,15 +3,75 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- iOS Smart App Banner: native "View in App Store" bar on iPhone Safari -->
+<meta name="apple-itunes-app" content="app-id=6761695226" />
 <title>MapChat: Come out and play</title>
 <meta name="description" content="MapChat shows you what's happening around you right now, who's out, where they're going, and an easy way in. Find bars, restaurants and events nearby, wave to break the ice, and play in-venue games. Come out and play." />
+<link rel="canonical" href="https://mapchat.social/" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#0a0a0a" />
 
 <!-- Open Graph -->
 <meta property="og:title" content="MapChat: Come out and play" />
 <meta property="og:description" content="See what's happening around you, who's going, and an easy way in. No cold DMs. Just walk in and play." />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="assets/icon.png" />
+<meta property="og:site_name" content="MapChat" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="https://mapchat.social/" />
+<meta property="og:image" content="https://mapchat.social/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MapChat: Come out and play" />
+<meta name="twitter:description" content="See what's happening around you, who's going, and an easy way in. No cold DMs. Just walk in and play." />
+<meta name="twitter:image" content="https://mapchat.social/assets/og-image.png" />
+
 <link rel="icon" type="image/png" href="assets/icon.png" />
+<link rel="apple-touch-icon" href="assets/icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MapChat",
+  "url": "https://mapchat.social",
+  "logo": "https://mapchat.social/assets/icon.png",
+  "sameAs": [
+    "https://www.instagram.com/mapchatsocial/",
+    "https://www.tiktok.com/@mapchat",
+    "https://www.linkedin.com/company/mapchatsocial/"
+  ],
+  "description": "MapChat is a location-based social discovery app built around third places: the bars, restaurants, and nightlife venues where community happens. Its mission is to help end the loneliness epidemic by helping people in the same physical space actually connect.",
+  "foundingLocation": { "@type": "Place", "name": "Los Angeles, California" },
+  "founder": { "@type": "Person", "name": "Benji Steely-Boehlke", "jobTitle": "Founder & CEO" },
+  "areaServed": ["Los Angeles", "Washington, D.C.", "Monadnock Region, New Hampshire"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "MapChat",
+  "url": "https://mapchat.social"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "MapChat",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "SocialNetworkingApplication",
+  "url": "https://mapchat.social",
+  "installUrl": "https://apps.apple.com/us/app/mapchat-social/id6761695226",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "A social discovery app that maps third places, shows you who is out, and helps people nearby meet in real life."
+}
+</script>
 
 <!-- Fonts: marketing layer = Space Grotesk display + Caveat hand -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -740,6 +800,10 @@ p{line-height:1.5}
   .stat:nth-child(3){border-top:1px solid rgba(255,255,255,.18)}
 }
 </style>
+
+<!-- Cloudflare Web Analytics — cookieless; beacon token configured in assets/analytics.js -->
+<script defer src="assets/analytics.js"></script>
+<script defer src="assets/track-store-clicks.js"></script>
 </head>
 <body>
 
@@ -879,7 +943,7 @@ p{line-height:1.5}
           <div class="phone">
             <div class="notch"></div>
             <div class="screen">
-              <img src="assets/hero-app.jpg" class="screen-img" alt="MapChat live map of events near you" />
+              <img src="assets/hero-app.jpg" class="screen-img" alt="MapChat live map of events near you" loading="lazy" />
             </div>
           </div>
         </div>
@@ -892,7 +956,7 @@ p{line-height:1.5}
           <div class="phone">
             <div class="notch"></div>
             <div class="screen">
-              <img src="assets/screen-explore.jpg" class="screen-img" alt="MapChat Explore screen showing nearby bars and events" />
+              <img src="assets/screen-explore.jpg" class="screen-img" alt="MapChat Explore screen showing nearby bars and events" loading="lazy" />
             </div>
           </div>
         </div>
@@ -905,7 +969,7 @@ p{line-height:1.5}
           <div class="phone">
             <div class="notch"></div>
             <div class="screen">
-              <img src="assets/screen-games.jpg" class="screen-img" alt="MapChat Games screen featuring Imprompto, hosted by Chrys" />
+              <img src="assets/screen-games.jpg" class="screen-img" alt="MapChat Games screen featuring Imprompto, hosted by Chrys" loading="lazy" />
             </div>
           </div>
         </div>
@@ -918,7 +982,7 @@ p{line-height:1.5}
           <div class="phone">
             <div class="notch"></div>
             <div class="screen">
-              <img src="assets/screen-social.jpg" class="screen-img" alt="MapChat Social screen showing waves from people nearby" />
+              <img src="assets/screen-social.jpg" class="screen-img" alt="MapChat Social screen showing waves from people nearby" loading="lazy" />
             </div>
           </div>
         </div>
@@ -945,7 +1009,7 @@ p{line-height:1.5}
       <div class="phone">
         <div class="notch"></div>
         <div class="screen">
-          <img src="assets/screen-games.jpg" class="screen-img" alt="MapChat Games screen featuring Imprompto, hosted by Chrys" />
+          <img src="assets/screen-games.jpg" class="screen-img" alt="MapChat Games screen featuring Imprompto, hosted by Chrys" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1060,7 +1124,7 @@ p{line-height:1.5}
 <section class="section founder" id="story">
   <div class="wrap founder-grid">
     <div class="founder-photo reveal">
-      <img src="assets/founder.jpg" alt="Benji Steely-Boehlke, founder of MapChat" />
+      <img src="assets/founder.jpg" alt="Benji Steely-Boehlke, founder of MapChat" loading="lazy" />
       <div class="founder-cap">
         <div class="fc-name">Benji Steely-Boehlke</div>
         <div class="fc-role">Founder, MapChat</div>
@@ -1159,7 +1223,7 @@ p{line-height:1.5}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/icon.png" alt="MapChat" />
+        <img src="assets/icon.png" alt="MapChat" loading="lazy" />
         <p>MapChat is a location-based social-discovery app. Find what's happening nearby, see who's going, wave to break the ice, and play. Come out and play.</p>
       </div>
       <div class="foot-col">

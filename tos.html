@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- iOS Smart App Banner: native "View in App Store" bar on iPhone Safari -->
+  <meta name="apple-itunes-app" content="app-id=6761695226">
   <title>Terms of Service | MapChat</title>
   <meta name="description" content="MapChat Terms of Service. The agreement that governs your use of the MapChat app and mapchat.social.">
   <link rel="canonical" href="https://mapchat.social/tos">
@@ -13,8 +15,14 @@
   <meta property="og:title" content="Terms of Service | MapChat">
   <meta property="og:description" content="The agreement that governs your use of MapChat.">
   <meta property="og:url" content="https://mapchat.social/tos">
-  <meta property="og:image" content="https://mapchat.social/assets/icon.png">
+  <meta property="og:image" content="https://mapchat.social/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://mapchat.social/assets/og-image.png">
   <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,6 +112,10 @@
     .foot-col a:hover{color:#fff}
     .foot-bottom{max-width:1120px;margin:0 auto;padding:26px 24px 36px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--mute-dark);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--hair-dark)}
   </style>
+
+  <!-- Cloudflare Web Analytics — cookieless; beacon token configured in assets/analytics.js -->
+  <script defer src="assets/analytics.js"></script>
+  <script defer src="assets/track-store-clicks.js"></script>
 </head>
 <body>
   <header class="nav">
