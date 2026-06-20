@@ -1296,6 +1296,23 @@ const WAITLIST_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/waitlist_
 const EMAIL_CHECK_URL = 'https://sfxhzmniyfvrmprjzmsj.supabase.co/rest/v1/rpc/check_signup_email_allowed';
 const WAITLIST_KEY = 'sb_publishable_A0eaeoNBE4Fqpd-ngVOPgg_RnUS770_';
 
+/* read the first-touch campaign tags (set by assets/track-store-clicks.js on
+   load) so a signup is attributed to the campaign that brought the visitor in;
+   fall back to the current URL. Each tag is capped at 100 chars (the database
+   limit) so an over-long tag can never make the signup insert fail. */
+const readWaitlistUtm = () => {
+  const cap = (v) => (v == null || v === '' ? null : String(v).slice(0, 100));
+  try {
+    const raw = sessionStorage.getItem('mc_utm');
+    if (raw) {
+      const u = JSON.parse(raw);
+      return { utm_source: cap(u.source), utm_medium: cap(u.medium), utm_campaign: cap(u.campaign) };
+    }
+  } catch (e) { /* storage blocked — fall back to URL */ }
+  const p = new URLSearchParams(location.search);
+  return { utm_source: cap(p.get('utm_source')), utm_medium: cap(p.get('utm_medium')), utm_campaign: cap(p.get('utm_campaign')) };
+};
+
 document.querySelectorAll('.email-form').forEach((form) => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -1365,6 +1382,7 @@ document.querySelectorAll('.email-form').forEach((form) => {
           city: city || null,
           latitude: picked ? Number(form.dataset.cityLat) : null,
           longitude: picked ? Number(form.dataset.cityLng) : null,
+          ...readWaitlistUtm(),
         }),
       });
       if (!res.ok) throw new Error('waitlist insert failed: HTTP ' + res.status);
