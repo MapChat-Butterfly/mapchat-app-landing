@@ -739,6 +739,12 @@ p{line-height:1.5}
   .games .phone{width:236px;padding:9px;border-radius:36px;box-shadow:0 36px 80px rgba(0,0,0,.55), 0 0 0 2px #232327, 0 0 0 6px #0d0d10}
   .games .phone .notch{width:94px;height:20px}
   .games .phone .screen{border-radius:28px}
+  /* store buttons: keep App Store + Google Play side by side on mobile */
+  .hero-cta{flex-wrap:nowrap;gap:10px}
+  .hero-cta .store{flex:1 1 0;min-width:0;justify-content:center;padding:10px 12px;gap:9px}
+  .hero-cta .store ion-icon{font-size:24px}
+  .hero-cta .store .gp-icon{width:19px;height:21px}
+  .hero-cta .store .s-big{font-size:15px}
   /* games CTA: keep both buttons side by side on mobile */
   .games .hero-cta{flex-wrap:nowrap;gap:10px;justify-content:center}
   .games .hero-cta .btn{flex:1 1 0;min-width:0;padding:13px 14px;font-size:13px;text-align:center;justify-content:center;white-space:nowrap}
@@ -828,12 +834,30 @@ p{line-height:1.5}
 <!-- ===================== HERO ===================== -->
 <header class="hero" id="top">
   <div class="wrap hero-grid">
-    <div class="hero-copy reveal">
+    <div class="hero-copy">
       <span class="kicker"><span class="dot"></span>Location-based social discovery</span>
       <h1>Come out <br/>and <span class="play">PLAY.</span></h1>
       <span class="scribble" style="position:static;display:inline-block;margin:16px 0 0;transform:none">no cold DMs · no standing by the bar alone</span>
       <p class="hero-sub">MapChat shows you what's happening around you right now, who's out, where they're going, and an easy way in. Wave to break the ice, let the games do the talking, and turn "I should go out more" into tonight.</p>
       <p class="hero-cities"><ion-icon name="location"></ion-icon> Now live in <strong>LA</strong>, <strong>DC</strong> &amp; <strong>Monadnock</strong></p>
+
+      <!-- hero mascot cast: desktop = absolute arch overlay; mobile = stacked row ABOVE the store buttons -->
+      <div class="hero-cast" aria-hidden="true">
+        <svg class="cast-path" viewBox="0 0 320 100" preserveAspectRatio="none"><path d="M 14 86 C 92 84 134 60 176 50 S 256 22 306 14" /></svg>
+        <figure class="cast-node n-wiggles">
+          <img src="assets/mascot-wiggles.png" alt="" />
+          <figcaption>the “maybe”</figcaption>
+        </figure>
+        <figure class="cast-node n-chrys">
+          <img src="assets/mascot-chrys.png" alt="" />
+          <figcaption>the wave</figcaption>
+        </figure>
+        <figure class="cast-node n-flutters">
+          <img src="assets/mascot-flutters.png" alt="" />
+          <figcaption>the night</figcaption>
+        </figure>
+      </div>
+
       <div class="hero-cta">
         <a href="https://apps.apple.com/us/app/mapchat-social/id6761695226" class="store" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
           <ion-icon name="logo-apple"></ion-icon>
@@ -845,23 +869,6 @@ p{line-height:1.5}
         </a>
       </div>
       <a href="#get" class="hero-city-cta" id="heroNewsCta"><ion-icon name="mail-outline"></ion-icon> Want first dibs on the good nights? Drop your email</a>
-    </div>
-
-    <!-- hero mascot cast: desktop = absolute arch overlay; mobile = stacked row ABOVE the phone -->
-    <div class="hero-cast" aria-hidden="true">
-      <svg class="cast-path" viewBox="0 0 320 100" preserveAspectRatio="none"><path d="M 14 86 C 92 84 134 60 176 50 S 256 22 306 14" /></svg>
-      <figure class="cast-node n-wiggles">
-        <img src="assets/mascot-wiggles.png" alt="" />
-        <figcaption>the “maybe”</figcaption>
-      </figure>
-      <figure class="cast-node n-chrys">
-        <img src="assets/mascot-chrys.png" alt="" />
-        <figcaption>the wave</figcaption>
-      </figure>
-      <figure class="cast-node n-flutters">
-        <img src="assets/mascot-flutters.png" alt="" />
-        <figcaption>the night</figcaption>
-      </figure>
     </div>
 
     <!-- PHONE: Explore / map -->
